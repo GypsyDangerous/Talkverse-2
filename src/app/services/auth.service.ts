@@ -23,7 +23,9 @@ export class AuthService {
 		this.user$ = this.afAuth.authState.pipe(
 			switchMap(user => {
 				if (!user) return of(null);
-				return this.firestore.doc<User>(`users/${user.uid}`).valueChanges({idField: "id"});
+				return this.firestore
+					.doc<User>(`users/${user.uid}`)
+					.valueChanges({ idField: "id" });
 			})
 		);
 	}
@@ -37,5 +39,11 @@ export class AuthService {
 	async signOut() {
 		await this.afAuth.signOut();
 		return this.router.navigate(["/"]);
+	}
+
+	async register(email: string, password: string, username: string) {
+		const user = await firebase.auth().signInWithEmailAndPassword(email, password);
+		await user.user?.updateProfile({ displayName: username });
+		return await this.firestore.doc(`users/${user.user?.uid}`).set({ username: username }, { merge: true });
 	}
 }
