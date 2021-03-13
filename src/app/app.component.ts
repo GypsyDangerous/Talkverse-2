@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "./services/auth.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
-  title = 'chat-app';
+export class AppComponent implements OnInit {
+	constructor(public auth: AuthService) {}
+
+	ngOnInit(): void {
+		this.auth.user$.subscribe(console.log)
+	}
+
 }
+

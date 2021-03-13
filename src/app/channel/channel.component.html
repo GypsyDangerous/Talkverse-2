@@ -1,0 +1,3 @@
+<p>channel works!</p>
+<p *ngIf="loading">Loading...</p>
+<p *ngIf="!loading">{{ (channel$ | async)?.name }}</p>
