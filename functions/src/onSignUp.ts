@@ -9,8 +9,11 @@ export const createUserDoc = functions.auth.user().onCreate(async user => {
 		.set(
 			{
 				username: user.displayName,
-				emailVerified: user.emailVerified,
-				avatar: user.photoURL ?? "/avatar.png",
+				photoURL: user.photoURL ?? "/avatar.png",
+				email: user.email,
+				displayName: user.displayName,
+				status: "",
+				channels: [],
 			},
 			{ merge: true }
 		);
