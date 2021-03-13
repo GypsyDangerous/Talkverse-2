@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "talkverse2": {
+      "hosting": {
+        "chat-app": [
+          "talkverse2"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "talkverse2"
+  }
+}
