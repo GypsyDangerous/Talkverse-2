@@ -1,11 +1,30 @@
 <form [formGroup]="myForm" (ngSubmit)="submitHandler()">
-	value:
-	<pre>{{ myForm.value | json }}</pre>
-	<mat-form-field >
-		<input matInput placeholder="Email"  formControlName="email" type="text" name="email" id="email" />
+	<mat-form-field>
+		<input
+			matInput
+			placeholder="Email"
+			formControlName="email"
+			type="text"
+			name="email"
+			id="email"
+		/>
+		<mat-error *ngIf="email?.invalid && email?.touched">
+			Your email is missing or invalid
+		</mat-error>
 	</mat-form-field>
-	<mat-form-field >
-		<input matInput placeholder="Password" formControlName="password" name="password" type="password" id="password" />
+	<mat-form-field>
+		<input
+			matInput
+			placeholder="Password"
+			formControlName="password"
+			name="password"
+			type="password"
+			id="password"
+		/>
+		<mat-hint align="start" *ngIf="password?.untouched || password?.valid">Must be atleast 6 characters long</mat-hint>
+		<mat-error *ngIf="password?.touched && password?.invalid"
+			>Must be atleast 6 characters long</mat-error
+		>
 	</mat-form-field>
 	<button mat-raised-button color="primary" type="submit">Login</button>
 </form>
