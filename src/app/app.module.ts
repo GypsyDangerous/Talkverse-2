@@ -15,6 +15,13 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "../environments/environment";
 import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatChipsModule } from "@angular/material/chips";
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -32,7 +39,13 @@ import { ReactiveFormsModule } from "@angular/forms";
 		AngularFirestoreModule, // firestore
 		AngularFireAuthModule, // auth
 		AngularFireStorageModule, // storage
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		BrowserAnimationsModule,
+		MatInputModule,
+		MatButtonModule,
+		MatSelectModule,
+		MatCheckboxModule,
+		MatChipsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

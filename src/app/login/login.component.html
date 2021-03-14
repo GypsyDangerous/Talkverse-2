@@ -1,12 +1,11 @@
 <form [formGroup]="myForm" (ngSubmit)="submitHandler()">
-	value: <pre>{{myForm.value | json}}</pre>
-	<div class="form-group">
-		<label for="email">Email</label>
-		<input formControlName="email" type="text" name="email" id="email" />
-	</div>
-	<div class="form-group">
-		<label for="password">Password</label>
-		<input formControlName="password" name="password" type="password" id="password" />
-	</div>
-	<button type="submit">Login</button>
+	value:
+	<pre>{{ myForm.value | json }}</pre>
+	<mat-form-field >
+		<input matInput placeholder="Email"  formControlName="email" type="text" name="email" id="email" />
+	</mat-form-field>
+	<mat-form-field >
+		<input matInput placeholder="Password" formControlName="password" name="password" type="password" id="password" />
+	</mat-form-field>
+	<button mat-raised-button color="primary" type="submit">Login</button>
 </form>
