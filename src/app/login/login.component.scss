@@ -1,6 +1,14 @@
 form {
 	display: flex;
 	flex-direction: column;
-	max-width: 50%;
+	gap: 1rem;
+}
+
+.auth-form-container {
+	border: solid ;
+	width: 100vw;
+	max-width: 400px;
 	margin: 0 auto;
+	padding: 4rem 3rem;
+	border-radius: .25rem;
 }
