@@ -42,8 +42,13 @@ export class AuthService {
 	}
 
 	async register(email: string, password: string, username: string) {
-		const user = await firebase.auth().signInWithEmailAndPassword(email, password);
+		const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
 		await user.user?.updateProfile({ displayName: username });
 		return await this.firestore.doc(`users/${user.user?.uid}`).set({ username: username }, { merge: true });
+	}
+
+	async login(email: string, password: string) {
+		const user = await firebase.auth().signInWithEmailAndPassword(email, password);
+		return user
 	}
 }
