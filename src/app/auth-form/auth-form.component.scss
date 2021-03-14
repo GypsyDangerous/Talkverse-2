@@ -1,0 +1,39 @@
+header {
+	margin-bottom: 1rem;
+	text-align: center;
+	h1 {
+		font-size: 3rem;
+	}
+}
+
+.alternatives {
+	margin-top: 2rem;
+	p {
+		color: #ccc;
+	}
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	button {
+		display: flex;
+		align-items: center;
+		background: white;
+		color: black;
+		img {
+			display: inline-block;
+			margin-right: 1ch;
+		}
+	}
+}
+
+.links {
+	margin-top: 2rem;
+	text-align: center;
+	p{
+		margin: 0;
+	}
+	a {
+		color: #c2185b;
+	}
+}

@@ -23,6 +23,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { AuthFormComponent } from './auth-form/auth-form.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -32,6 +33,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 		RegisterComponent,
 		ProfileComponent,
 		ChannelComponent,
+		AuthFormComponent,
 	],
 	imports: [
 		BrowserModule,

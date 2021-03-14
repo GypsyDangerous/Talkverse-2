@@ -2,13 +2,22 @@ form {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+	width: 100%;
+	button {
+		margin-top: 0.5rem;
+	}
 }
 
+// Include theme styles for Angular Material components.
+
 .auth-form-container {
-	border: solid ;
+	display: flex;
 	width: 100vw;
 	max-width: 400px;
 	margin: 0 auto;
 	padding: 4rem 3rem;
-	border-radius: .25rem;
+	border-radius: 0.25rem;
+	flex-direction: column;
+	background: #36393f;
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }

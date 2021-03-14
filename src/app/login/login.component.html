@@ -1,4 +1,4 @@
-<div class="auth-form-container">
+<auth-form class="auth-form-container" title="Login" [register]="false">
 	<form [formGroup]="myForm" (ngSubmit)="submitHandler()">
 		<mat-form-field>
 			<input
@@ -31,4 +31,4 @@
 		</mat-form-field>
 		<button mat-raised-button color="primary" type="submit">Login</button>
 	</form>
-</div>
+</auth-form>

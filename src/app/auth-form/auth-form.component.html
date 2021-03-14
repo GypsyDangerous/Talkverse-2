@@ -1,0 +1,19 @@
+<header>
+	<h1>{{ title }}</h1>
+</header>
+<ng-content></ng-content>
+<div class="alternatives">
+	<p>----------- Or sign in with -----------</p>
+	<button mat-raised-button (click)="auth.googleSignin()">
+		<img width="25" height="25" src="/assets/google-logo.png" alt="" /> Google
+	</button>
+</div>
+<div class="links">
+	<p *ngIf="register; else login">
+		Already have an account? <a routerLink="/auth/login">login now</a>
+	</p>
+</div>
+
+<ng-template #login>
+	<p>Not a member? <a routerLink="/auth/register">register now</a></p>
+</ng-template>
