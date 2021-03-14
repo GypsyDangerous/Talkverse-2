@@ -13,7 +13,8 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import {environment} from "../environments/environment";
+import { environment } from "../environments/environment";
+import { ReactiveFormsModule } from "@angular/forms";
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -31,6 +32,7 @@ import {environment} from "../environments/environment";
 		AngularFirestoreModule, // firestore
 		AngularFireAuthModule, // auth
 		AngularFireStorageModule, // storage
+		ReactiveFormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],
