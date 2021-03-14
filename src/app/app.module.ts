@@ -24,6 +24,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { AuthFormComponent } from './auth-form/auth-form.component';
+import { HeaderComponent } from './ui/header/header.component';
+import { SidebarComponent } from './ui/sidebar/sidebar.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -34,6 +36,8 @@ import { AuthFormComponent } from './auth-form/auth-form.component';
 		ProfileComponent,
 		ChannelComponent,
 		AuthFormComponent,
+		HeaderComponent,
+		SidebarComponent,
 	],
 	imports: [
 		BrowserModule,

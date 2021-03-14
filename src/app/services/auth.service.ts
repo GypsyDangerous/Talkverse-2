@@ -38,7 +38,7 @@ export class AuthService {
 
 	async signOut() {
 		await this.afAuth.signOut();
-		return this.router.navigate(["/"]);
+		return this.router.navigate(["/auth/login"]);
 	}
 
 	async register(email: string, password: string, username: string) {
