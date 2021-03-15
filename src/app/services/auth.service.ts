@@ -41,6 +41,10 @@ export class AuthService {
 		return this.router.navigate(["/auth/login"]);
 	}
 
+	async logout() {
+		this.signOut()
+	}
+
 	async register(email: string, password: string, username: string) {
 		const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
 		await user.user?.updateProfile({ displayName: username });

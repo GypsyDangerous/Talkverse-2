@@ -1,11 +1,48 @@
 <div class="sidebar-parent">
 	<header class="section-header">
-
+		<div *ngIf="showMembers; else channelHeader"></div>
 	</header>
-
-
+	<main>
+		<div *ngIf="showMembers; else channels"></div>
+	</main>
 
 	<footer>
-		
+		<img width="42" height="42" [src]="(this.auth.user$ | async)?.avatar" alt="" />
+		<span>{{ (this.auth.user$ | async)?.username }}</span>
+		<button (click)="this.togglePopup()" class="chevron-button">
+			<mat-icon>keyboard_arrow_up</mat-icon>
+		</button>
+		<div
+			*ngIf="this.popUpOpen"
+			class="pop-up"
+		>
+			<ul class="top list">
+				<li>
+					<button mat-button><mat-icon>account_circle</mat-icon> Profile</button>
+				</li>
+			</ul>
+			<hr />
+			<ul class="bottom list">
+				<li>
+					<button (click)="this.auth.logout()" mat-button>
+						<mat-icon>exit_to_app</mat-icon> Logout
+					</button>
+				</li>
+			</ul>
+		</div>
 	</footer>
 </div>
+
+<ng-template #channels>
+	<ul class="channels">
+		<channel-item
+			*ngFor="let channel of this.channels$ | async"
+			[channel]="channel"
+		></channel-item>
+	</ul>
+</ng-template>
+
+<ng-template #channelHeader>
+	<h1>Channels</h1>
+	<button mat-button><mat-icon>add</mat-icon></button>
+</ng-template>

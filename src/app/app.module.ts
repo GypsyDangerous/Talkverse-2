@@ -32,6 +32,14 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { MessageComponent } from "./message/message.component";
 import { MatIconModule } from "@angular/material/icon";
 import { AutosizeModule } from "ngx-autosize";
+import { ChannelItemComponent } from './ui/channel-item/channel-item.component';
+import { ClickOutsideModule } from 'ng-click-outside';
+
+
+
+
+
+
 
 @NgModule({
 	declarations: [
@@ -48,6 +56,7 @@ import { AutosizeModule } from "ngx-autosize";
 		ChannelParentComponent,
 		LoadingSpinnerComponent,
 		MessageComponent,
+		ChannelItemComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -67,6 +76,7 @@ import { AutosizeModule } from "ngx-autosize";
 		NgxSkeletonLoaderModule,
 		MatIconModule,
 		AutosizeModule,
+		ClickOutsideModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

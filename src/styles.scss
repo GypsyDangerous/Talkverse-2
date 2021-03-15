@@ -47,6 +47,10 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+:root{
+	--warn-red: #EB5757;
+}
+
 html,
 body {
 	height: 100%;
@@ -71,7 +75,7 @@ app-channel {
 
 .section-header {
 	width: 100%;
-	max-height: 60px;
+	height: 60px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -88,4 +92,11 @@ img.emoji {
 		width: 2rem;
 		height: 2rem;
 	}
+}
+
+.chevron-button{
+	border: none;
+	outline: none;
+	background:none;
+	color: white;
 }

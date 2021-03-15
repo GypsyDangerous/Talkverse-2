@@ -18,6 +18,18 @@
 	display: flex;
 	flex-direction: column-reverse;
 	overflow: auto;
+	&::-webkit-scrollbar {
+		width: 0.5rem;
+	}
+
+	&::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 100vh;
+		background: #120f13;
+	}
 }
 
 header {
@@ -39,6 +51,7 @@ header {
 .message-input {
 	// position: absolute;
 	// bottom: 1rem;
+	margin-right: 1.5rem;
 	align-self: center;
 	width: 100%;
 	.input-body {
@@ -74,6 +87,7 @@ header {
 
 .channel-area {
 	padding: 1rem 2rem;
+	padding-right: 0.5rem;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
