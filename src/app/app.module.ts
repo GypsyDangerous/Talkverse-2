@@ -23,13 +23,15 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { AuthFormComponent } from './auth-form/auth-form.component';
-import { HeaderComponent } from './ui/header/header.component';
-import { SidebarComponent } from './ui/sidebar/sidebar.component';
-import { ChannelParentComponent } from './channel-parent/channel-parent.component';
-import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
+import { AuthFormComponent } from "./auth-form/auth-form.component";
+import { HeaderComponent } from "./ui/header/header.component";
+import { SidebarComponent } from "./ui/sidebar/sidebar.component";
+import { ChannelParentComponent } from "./channel-parent/channel-parent.component";
+import { LoadingSpinnerComponent } from "./ui/loading-spinner/loading-spinner.component";
+import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
+import { MessageComponent } from "./message/message.component";
+import { MatIconModule } from "@angular/material/icon";
+import { AutosizeModule } from "ngx-autosize";
 
 @NgModule({
 	declarations: [
@@ -45,6 +47,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 		SidebarComponent,
 		ChannelParentComponent,
 		LoadingSpinnerComponent,
+		MessageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -61,7 +64,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 		MatCheckboxModule,
 		MatChipsModule,
 		MatSnackBarModule,
-		NgxSkeletonLoaderModule
+		NgxSkeletonLoaderModule,
+		MatIconModule,
+		AutosizeModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

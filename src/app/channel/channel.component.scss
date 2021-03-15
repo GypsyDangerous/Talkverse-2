@@ -3,6 +3,7 @@
 	flex: 1;
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
 }
 
 .spinner-container {
@@ -13,11 +14,12 @@
 	height: 40px;
 }
 
+.messages {
+	display: flex;
+	flex-direction: column;
+}
+
 header {
-	
-	
-
-
 	h1 {
 		margin: 0;
 		// font-style: normal;
@@ -31,4 +33,37 @@ header {
 	padding: 1.8rem;
 	display: flex;
 	align-items: center;
+}
+
+.message-input {
+	position: absolute;
+	bottom: 1rem;
+	align-self: center;
+	width: 90%;
+	.input-body {
+		width: 100%;
+		background: #3c393f;
+		padding: .5rem;
+		border-radius: 0.5rem;
+		button {
+			border-radius: 0.5rem;
+			border: none;
+			outline: none;
+			background: #2f80ed;
+			color: white;
+			height: 40px;
+			width: 40px;
+		}
+		display: flex;
+		align-items: start;
+		// align-items: center;
+		textarea {
+			background: none;
+			outline: none;
+			border: none;
+			flex: 1;
+			color: white;
+			resize: none;
+		}
+	}
 }

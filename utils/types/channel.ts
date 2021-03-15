@@ -5,4 +5,5 @@ export interface channel {
 	message_count: number,
 	name: string,
 	description: string,
+	id?: string
 }

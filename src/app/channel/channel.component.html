@@ -1,10 +1,44 @@
 <main class="channel">
 	<header class="section-header">
-		<ngx-skeleton-loader *ngIf="loading; else name" [theme]="{marginBottom: '0px', backgroundColor: '#eff1f633', maxWidth: '50vw', width: '400px'}" count="1" animation="progress-dark"></ngx-skeleton-loader>
+		<ngx-skeleton-loader
+			*ngIf="loading; else name"
+			[theme]="{
+				marginBottom: '0px',
+				backgroundColor: '#eff1f633',
+				maxWidth: '50vw',
+				width: '400px'
+			}"
+			count="1"
+			animation="progress-dark"
+		></ngx-skeleton-loader>
 	</header>
-	<div class="spinner-container" *ngIf="!loading">
-		<app-loading-spinner></app-loading-spinner>
+	<div class="messages">
+		<div class="spinner-container" *ngIf="loading; else messages">
+			<app-loading-spinner></app-loading-spinner>
+		</div>
 	</div>
+
+	<form id="message-form" (ngSubmit)="sendMessage()" class="message-input" [formGroup]="myForm">
+		<div class="input-body">
+			<textarea
+				(keyup.enter)="enterSubmit()"
+				formControlName="message"
+				autosize
+				name="message"
+				id="message"
+				placeholder="Enter Message"
+			></textarea>
+			<button type="submit" id="message-button"><mat-icon>send</mat-icon></button>
+		</div>
+	</form>
 </main>
 
-<ng-template #name><h1>{{ (channel$ | async)?.name }}</h1></ng-template>
+<ng-template #name
+	><h1>{{ (channel$ | async)?.name }}</h1></ng-template
+>
+
+<ng-template #messages>
+	<div *ngFor="let message of messages$ | async">
+		<pre>{{ message | json }}</pre>
+	</div>
+</ng-template>

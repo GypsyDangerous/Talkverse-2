@@ -1,9 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { switchMap } from "rxjs/operators";
+import { map, switchMap, take, tap } from "rxjs/operators";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { merge, Observable, of } from "rxjs";
 import { channel } from "utils/types/channel";
+import { message } from "utils/types/message";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../services/auth.service";
+import firebase from "firebase/app";
+
+const defaultMessageForm = {
+	message: ["", [Validators.required]],
+};
 
 @Component({
 	selector: "app-channel",
@@ -12,20 +20,34 @@ import { channel } from "utils/types/channel";
 })
 export class ChannelComponent implements OnInit {
 	channel$: Observable<channel | undefined>;
-	id: string = "";
 	loading: boolean = true;
+	messages$: Observable<message[]>;
+
+	myForm: FormGroup;
+
 	constructor(
 		private firestore: AngularFirestore,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private builder: FormBuilder,
+		private auth: AuthService
 	) {
 		this.channel$ = this.route.paramMap.pipe(
 			switchMap(params => {
 				const id = params.get("id") as string;
-				this.id = id;
 				return this.firestore
 					.collection("conversations")
 					.doc<channel>(id || " ")
+					.valueChanges({ idField: "id" });
+			})
+		);
+		this.messages$ = this.route.paramMap.pipe(
+			switchMap(params => {
+				const id = params.get("id") as string;
+				return this.firestore
+					.collection("conversations")
+					.doc<channel>(id || " ")
+					.collection<message>("messages", ref => ref.orderBy("created_at", "asc"))
 					.valueChanges();
 			})
 		);
@@ -36,8 +58,58 @@ export class ChannelComponent implements OnInit {
 			this.loading = false;
 			console.log(data);
 			if (!data) {
-				this.router.navigate(["/"]);
+				this.router.navigate(["/channel"]);
 			}
 		});
+
+		this.myForm = this.builder.group({ ...defaultMessageForm });
+	}
+
+	get currentMessage() {
+		return this.myForm.get("message");
+	}
+
+	async sendMessage() {
+		// if(!this.myForm.valid) return
+		console.log("submitted");
+
+		const raw_text = this.myForm.value.message;
+		this.auth.user$
+			.pipe(
+				tap(user => {
+					this.channel$
+						.pipe(
+							tap(channel => {
+								const parsed_text = raw_text;
+								const channelId = channel?.id;
+								const sender = user;
+								const read_by: string[] = [];
+								const created_at = new Date().getTime();
+								return this.firestore
+									.collection("conversations")
+									.doc(channelId)
+									.collection("messages")
+									.add({
+										raw_text,
+										parsed_text,
+										channelId,
+										sender,
+										read_by,
+										created_at,
+									});
+							}),
+							take(1)
+						)
+						.subscribe(console.log);
+				}),
+				take(1)
+			)
+			.subscribe(() => {
+				this.myForm.setValue({ message: "" });
+			});
+	}
+
+	enterSubmit() {
+		document.getElementById("message-button")?.click();
 	}
 }
