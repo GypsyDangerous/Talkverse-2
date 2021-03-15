@@ -94,3 +94,7 @@ header {
 	max-height: calc(100vh - 60px);
 	justify-content: flex-end;
 }
+
+.channel-header-text {
+	cursor: pointer;
+}

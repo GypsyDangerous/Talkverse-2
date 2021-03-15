@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
 import firebase from "firebase/app";
 import { sanitizeHtml } from "utils/functions/string";
+import { ChannelService } from "../services/channel.service";
 
 const defaultMessageForm = {
 	message: ["", [Validators.required]],
@@ -31,7 +32,8 @@ export class ChannelComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private builder: FormBuilder,
-		private auth: AuthService
+		private auth: AuthService,
+		private channel: ChannelService
 	) {
 		this.channel$ = this.route.paramMap.pipe(
 			switchMap(params => {
@@ -42,6 +44,7 @@ export class ChannelComponent implements OnInit {
 					.valueChanges({ idField: "id" });
 			})
 		);
+		this.channel.setChannel(this.channel$)
 		this.messages$ = this.route.paramMap.pipe(
 			switchMap(params => {
 				const id = params.get("id") as string;
@@ -115,5 +118,9 @@ export class ChannelComponent implements OnInit {
 	enterSubmit(event: any) {
 		document.getElementById("message-button")?.click();
 		event.preventDefault()
+	}
+
+	toggleMembers(){
+		this.channel.showMembers = true
 	}
 }

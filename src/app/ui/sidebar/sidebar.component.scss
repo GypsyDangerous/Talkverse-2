@@ -56,22 +56,22 @@ footer {
 
 		color: #828282;
 	}
-	.pop-up{
+	.pop-up {
 		position: absolute;
 		bottom: 3rem;
-		right: .5rem;
+		right: 0.5rem;
 		background: #252329;
 		padding: 1rem;
-		border-radius: .5rem;
+		border-radius: 0.5rem;
 	}
 }
 
-.list{
-	li{
-		border-radius: .5rem;
+.list {
+	li {
+		border-radius: 0.5rem;
 		// background: #3c393f;
 		min-width: 164px;
-		button{
+		button {
 			width: 100%;
 			text-align: left;
 		}
@@ -79,8 +79,63 @@ footer {
 }
 
 .bottom.list {
-	li{
-		
+	li {
 		color: var(--warn-red);
+	}
+}
+
+.search-bar {
+	border-radius: 0.5rem;
+	margin-bottom: 2rem;
+	padding: 0.5rem;
+	background: #3c393f;
+	display: flex;
+	align-items: center;
+	input {
+		background: none;
+		font-size: 1.125rem;
+		color: white;
+		border: none;
+		outline: none;
+		margin-left: 1ch;
+		&::placeholder {
+			color: #828282;
+		}
+	}
+}
+
+.members-title {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.description {
+	font-size: 1rem;
+	line-height: 25px;
+}
+
+.channel-member {
+	display: flex;
+	align-items: center;
+	img {
+		margin-right: 2ch;
+		border-radius: 0.5rem;
+	}
+	span {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 25px;
+		/* identical to box height */
+
+		color: #828282;
+	}
+}
+
+.members-header-section{
+	display: flex;
+	align-items: center;
+	mat-icon{
+		margin-right: .5ch;
 	}
 }

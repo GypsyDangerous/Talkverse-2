@@ -42,7 +42,7 @@
 </main>
 
 <ng-template #name
-	><h1>{{ (channel$ | async)?.name }}</h1></ng-template
+	><h1 class="channel-header-text" (click)="toggleMembers()">{{ (channel$ | async)?.name }}</h1></ng-template
 >
 
 <ng-template #messages>

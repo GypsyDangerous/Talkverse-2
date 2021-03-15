@@ -1,9 +1,9 @@
 <div class="sidebar-parent">
 	<header class="section-header">
-		<div *ngIf="showMembers; else channelHeader"></div>
+		<div *ngIf="this.channel.showMembers; then memberHeader; else channelHeader"></div>
 	</header>
 	<main>
-		<div *ngIf="showMembers; else channels"></div>
+		<div *ngIf="this.channel.showMembers; then members; else channels"></div>
 	</main>
 
 	<footer>
@@ -12,10 +12,7 @@
 		<button (click)="this.togglePopup()" class="chevron-button">
 			<mat-icon>keyboard_arrow_up</mat-icon>
 		</button>
-		<div
-			*ngIf="this.popUpOpen"
-			class="pop-up"
-		>
+		<div *ngIf="this.popUpOpen" class="pop-up">
 			<ul class="top list">
 				<li>
 					<button mat-button><mat-icon>account_circle</mat-icon> Profile</button>
@@ -34,9 +31,19 @@
 </div>
 
 <ng-template #channels>
+	<div class="search-bar">
+		<mat-icon>search</mat-icon>
+		<input
+			type="text"
+			placeholder="Search"
+			id="search-bar"
+			[value]="this.searchText"
+			(input)="search($event)"
+		/>
+	</div>
 	<ul class="channels">
 		<channel-item
-			*ngFor="let channel of this.channels$ | async"
+			*ngFor="let channel of this.filteredChannels"
 			[channel]="channel"
 		></channel-item>
 	</ul>
@@ -45,4 +52,24 @@
 <ng-template #channelHeader>
 	<h1>Channels</h1>
 	<button mat-button><mat-icon>add</mat-icon></button>
+</ng-template>
+
+<ng-template #memberHeader>
+	<div class="members-header-section">
+		<button (click)="closeMembers()" class="chevron-button">
+			<mat-icon>chevron_left</mat-icon>
+		</button>
+		<h1>All Channels</h1>
+	</div>
+</ng-template>
+<ng-template #members>
+	<h2 class="members-title">{{ (this.channel.channel$ | async)?.name }}</h2>
+	<p class="description">{{ (this.channel.channel$ | async)?.description }}</p>
+	<h2 class="members-title">Members</h2>
+	<ul class="channels">
+		<li *ngFor="let member of this.members$ | async" class="channel-member">
+			<img [src]="member.avatar" alt="" width="42" height="42" />
+			<span>{{ member.username }}</span>
+		</li>
+	</ul>
 </ng-template>
