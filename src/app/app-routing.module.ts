@@ -12,6 +12,7 @@ import { ChannelComponent } from "./channel/channel.component";
 import { ChannelGuard } from "./guards/channel.guard";
 import { AuthGuard } from "./guards/auth.guard";
 import { AuthenticatedGuard } from "./guards/authenticated.guard";
+import { ChannelParentComponent } from "./channel-parent/channel-parent.component";
 
 const routes: Routes = [
 	{ path: "", pathMatch: "full", component: HomeComponent },
@@ -33,12 +34,18 @@ const routes: Routes = [
 	{
 		path: "profile",
 		component: ProfileComponent,
-		canActivate: [AuthenticatedGuard]
+		canActivate: [AuthenticatedGuard],
 	},
 	{
-		path: "channel/:id",
-		component: ChannelComponent,
-		canActivate: [AuthenticatedGuard, ChannelGuard],
+		path: "channel",
+		component: ChannelParentComponent,
+		children: [
+			{
+				path: ":id",
+				component: ChannelComponent,
+				canActivate: [AuthenticatedGuard, ChannelGuard],
+			},
+		],
 	},
 ];
 

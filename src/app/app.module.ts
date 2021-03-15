@@ -26,6 +26,11 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { HeaderComponent } from './ui/header/header.component';
 import { SidebarComponent } from './ui/sidebar/sidebar.component';
+import { ChannelParentComponent } from './channel-parent/channel-parent.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -38,6 +43,8 @@ import { SidebarComponent } from './ui/sidebar/sidebar.component';
 		AuthFormComponent,
 		HeaderComponent,
 		SidebarComponent,
+		ChannelParentComponent,
+		LoadingSpinnerComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -54,6 +61,7 @@ import { SidebarComponent } from './ui/sidebar/sidebar.component';
 		MatCheckboxModule,
 		MatChipsModule,
 		MatSnackBarModule,
+		NgxSkeletonLoaderModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

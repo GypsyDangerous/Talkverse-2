@@ -1,3 +1,10 @@
-<p>channel works!</p>
-<p *ngIf="loading">Loading...</p>
-<p *ngIf="!loading">{{ (channel$ | async)?.name }}</p>
+<main class="channel">
+	<header class="section-header">
+		<ngx-skeleton-loader *ngIf="loading; else name" [theme]="{marginBottom: '0px', backgroundColor: '#eff1f633', maxWidth: '50vw', width: '400px'}" count="1" animation="progress-dark"></ngx-skeleton-loader>
+	</header>
+	<div class="spinner-container" *ngIf="!loading">
+		<app-loading-spinner></app-loading-spinner>
+	</div>
+</main>
+
+<ng-template #name><h1>{{ (channel$ | async)?.name }}</h1></ng-template>

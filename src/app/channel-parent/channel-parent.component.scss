@@ -1,0 +1,9 @@
+.channel-parent{
+	overflow-y: hidden;
+	max-height: 100vh;
+	display: flex;
+}
+
+app-channel{
+	flex: 1;
+}
