@@ -8,6 +8,7 @@ import { message } from "utils/types/message";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
 import firebase from "firebase/app";
+import { sanitizeHtml } from "utils/functions/string";
 
 const defaultMessageForm = {
 	message: ["", [Validators.required]],
@@ -47,7 +48,7 @@ export class ChannelComponent implements OnInit {
 				return this.firestore
 					.collection("conversations")
 					.doc<channel>(id || " ")
-					.collection<message>("messages", ref => ref.orderBy("created_at", "asc"))
+					.collection<message>("messages", ref => ref.orderBy("created_at", "desc"))
 					.valueChanges();
 			})
 		);
@@ -70,17 +71,19 @@ export class ChannelComponent implements OnInit {
 	}
 
 	async sendMessage() {
-		// if(!this.myForm.valid) return
+		if (!this.myForm.valid) return;
 		console.log("submitted");
 
 		const raw_text = this.myForm.value.message;
+		console.log(raw_text)
 		this.auth.user$
 			.pipe(
 				tap(user => {
 					this.channel$
 						.pipe(
 							tap(channel => {
-								const parsed_text = raw_text;
+								//@ts-ignore
+								const parsed_text = twemoji.parse(sanitizeHtml(raw_text));
 								const channelId = channel?.id;
 								const sender = user;
 								const read_by: string[] = [];
@@ -109,7 +112,8 @@ export class ChannelComponent implements OnInit {
 			});
 	}
 
-	enterSubmit() {
+	enterSubmit(event: any) {
 		document.getElementById("message-button")?.click();
+		event.preventDefault()
 	}
 }

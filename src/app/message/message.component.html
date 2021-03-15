@@ -1,1 +1,12 @@
-<p>message works!</p>
+<div class="message">
+	<div class="avatar-area">
+		<img width="42" height="42" [src]="message.sender.avatar" alt="">
+	</div>
+	<div class="text-area">
+		<div class="header-area">
+			<span class="username">{{ message.sender.username }}</span
+			> <span class="timestamp">{{ this.timestamp }}</span>
+		</div>
+		<div class="content-area" [attr.data-only-emoji]="this.emojiOnly" [innerHTML]="message.parsed_text"></div>
+	</div>
+</div>

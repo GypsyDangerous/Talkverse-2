@@ -1,0 +1,36 @@
+.header-area {
+	color: #828282;
+	.timestamp {
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 19px;
+	}
+	.username {
+		display: inline-block;
+		margin-right: 1ch;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 25px;
+	}
+}
+
+.message {
+	display: flex;
+	margin: 1rem 0;
+}
+
+.avatar-area {
+	margin-right: 1.5rem;
+	img {
+		border-radius: 0.5rem;
+	}
+}
+
+.content-area {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 25px;
+	white-space: pre-wrap;
+	margin-top: .25rem;
+	
+}

@@ -12,25 +12,32 @@
 			animation="progress-dark"
 		></ngx-skeleton-loader>
 	</header>
-	<div class="messages">
-		<div class="spinner-container" *ngIf="loading; else messages">
-			<app-loading-spinner></app-loading-spinner>
+	<div class="channel-area">
+		<div class="messages">
+			<div class="spinner-container" *ngIf="loading; else messages">
+				<app-loading-spinner></app-loading-spinner>
+			</div>
 		</div>
-	</div>
 
-	<form id="message-form" (ngSubmit)="sendMessage()" class="message-input" [formGroup]="myForm">
-		<div class="input-body">
-			<textarea
-				(keyup.enter)="enterSubmit()"
-				formControlName="message"
-				autosize
-				name="message"
-				id="message"
-				placeholder="Enter Message"
-			></textarea>
-			<button type="submit" id="message-button"><mat-icon>send</mat-icon></button>
-		</div>
-	</form>
+		<form
+			id="message-form"
+			(ngSubmit)="sendMessage()"
+			class="message-input"
+			[formGroup]="myForm"
+		>
+			<div class="input-body">
+				<textarea
+					(keydown.enter)="enterSubmit($event)"
+					formControlName="message"
+					autosize
+					name="message"
+					id="message"
+					placeholder="Enter Message"
+				></textarea>
+				<button type="submit" id="message-button"><mat-icon>send</mat-icon></button>
+			</div>
+		</form>
+	</div>
 </main>
 
 <ng-template #name
@@ -38,7 +45,5 @@
 >
 
 <ng-template #messages>
-	<div *ngFor="let message of messages$ | async">
-		<pre>{{ message | json }}</pre>
-	</div>
+	<app-message *ngFor="let message of messages$ | async" [message]="message"></app-message>
 </ng-template>
