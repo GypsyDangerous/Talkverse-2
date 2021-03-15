@@ -30,9 +30,10 @@
 					(keydown.enter)="enterSubmit($event)"
 					formControlName="message"
 					autosize
+					rows="1"
 					name="message"
 					id="message"
-					placeholder="Enter Message"
+					[placeholder]="'Message #'+(channel$ |async)?.name"
 				></textarea>
 				<button type="submit" id="message-button"><mat-icon>send</mat-icon></button>
 			</div>
