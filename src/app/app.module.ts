@@ -34,7 +34,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { AutosizeModule } from "ngx-autosize";
 import { ChannelItemComponent } from './ui/channel-item/channel-item.component';
 import { ClickOutsideModule } from 'ng-click-outside';
-
+import { NewChannelComponent } from './new-channel/new-channel.component';
+import {MatDialogModule} from "@angular/material/dialog"
 
 
 
@@ -57,6 +58,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 		LoadingSpinnerComponent,
 		MessageComponent,
 		ChannelItemComponent,
+		NewChannelComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -76,7 +78,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
 		NgxSkeletonLoaderModule,
 		MatIconModule,
 		AutosizeModule,
-		ClickOutsideModule
+		ClickOutsideModule,
+		MatDialogModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

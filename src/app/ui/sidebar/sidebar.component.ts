@@ -7,6 +7,8 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import firebase from "firebase/app";
 import { ChannelService } from "src/app/services/channel.service";
 import { user } from "utils/types/user";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { NewChannelComponent } from "src/app/new-channel/new-channel.component";
 @Component({
 	selector: "app-sidebar",
 	templateUrl: "./sidebar.component.html",
@@ -22,7 +24,8 @@ export class SidebarComponent implements OnInit {
 	constructor(
 		public auth: AuthService,
 		private firestore: AngularFirestore,
-		public channel: ChannelService
+		public channel: ChannelService,
+		public dialog: MatDialog
 	) {
 		this.channels$ = this.auth.user$.pipe(
 			map(user => user.channels),
@@ -70,7 +73,17 @@ export class SidebarComponent implements OnInit {
 		return this.channels.filter(channel => channel.name.includes(this.searchText));
 	}
 
-	closeMembers(){
-		this.channel.showMembers = false
+	closeMembers() {
+		this.channel.showMembers = false;
+	}
+
+	openDialog(): void {
+		const dialogRef = this.dialog.open(NewChannelComponent, {
+			width: "250px",
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log("The dialog was closed");
+		});
 	}
 }
