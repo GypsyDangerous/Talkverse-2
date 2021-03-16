@@ -13,6 +13,7 @@ import { ChannelGuard } from "./guards/channel.guard";
 import { AuthGuard } from "./guards/auth.guard";
 import { AuthenticatedGuard } from "./guards/authenticated.guard";
 import { ChannelParentComponent } from "./channel-parent/channel-parent.component";
+import { JoinPageComponent } from "./join-page/join-page.component";
 
 const routes: Routes = [
 	{ path: "", pathMatch: "full", component: HomeComponent },
@@ -47,6 +48,10 @@ const routes: Routes = [
 			},
 		],
 	},
+	{
+		path: "join/:code",
+		component: JoinPageComponent,
+	}
 ];
 
 @NgModule({

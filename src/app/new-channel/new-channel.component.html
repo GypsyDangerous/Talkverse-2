@@ -1,1 +1,26 @@
-<p>new-channel works!</p>
+<h1>Create Channel</h1>
+
+<mat-form-field>
+	<mat-label>Name</mat-label>
+	<input type="text" matInput [(ngModel)]="data.name" />
+</mat-form-field>
+
+<mat-form-field>
+	<mat-label>Name</mat-label>
+	<input type="text" matInput [(ngModel)]="data.description" />
+</mat-form-field>
+
+<div mat-dialog-actions>
+	<button [mat-dialog-close]="data">Create Channel</button>
+</div>
+
+<p>Or</p>
+
+<h1>Join a channel</h1>
+
+<mat-form-field>
+	<mat-label>Name</mat-label>
+	<input type="text" matInput [(ngModel)]="data.inviteCode" />
+</mat-form-field>
+
+<a *ngIf="data.inviteCode?.length" [routerLink]="['join', data.inviteCode]">Join Channel</a>

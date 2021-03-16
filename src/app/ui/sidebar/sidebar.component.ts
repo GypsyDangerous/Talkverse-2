@@ -1,6 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { fromEvent, merge, Observable, of, Subject } from "rxjs";
-import { debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from "rxjs/operators";
+import {
+	debounceTime,
+	distinctUntilChanged,
+	filter,
+	map,
+	switchMap,
+	take,
+	takeLast,
+	tap,
+} from "rxjs/operators";
 import { AuthService } from "src/app/services/auth.service";
 import { channel } from "utils/types/channel";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -79,11 +88,38 @@ export class SidebarComponent implements OnInit {
 
 	openDialog(): void {
 		const dialogRef = this.dialog.open(NewChannelComponent, {
-			width: "250px",
+			width: "40%",
+			data: {
+				name: "",
+				description: "",
+			},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log("The dialog was closed");
+			if (!result) return;
+
+			this.auth.user$
+				.pipe(
+					switchMap(async user => {
+						const newChannel: channel = {
+							last_message: null,
+							name: result.name,
+							description: result.description,
+							message_count: 0,
+							owner: user,
+							inviteCodes: [],
+						};
+
+						const doc = await this.firestore
+							.collection("conversations")
+							.add(newChannel);
+						doc.collection("members").doc(user.id).set(user);
+					}),
+					take(1)
+				)
+				.subscribe();
+
+			console.log("The dialog was closed, result: " + result);
 		});
 	}
 }

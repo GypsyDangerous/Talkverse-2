@@ -14,7 +14,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "../environments/environment";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { MatInputModule } from "@angular/material/input";
@@ -35,7 +35,8 @@ import { AutosizeModule } from "ngx-autosize";
 import { ChannelItemComponent } from './ui/channel-item/channel-item.component';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { NewChannelComponent } from './new-channel/new-channel.component';
-import {MatDialogModule} from "@angular/material/dialog"
+import {MatDialogModule} from "@angular/material/dialog";
+import { JoinPageComponent } from './join-page/join-page.component'
 
 
 
@@ -59,6 +60,7 @@ import {MatDialogModule} from "@angular/material/dialog"
 		MessageComponent,
 		ChannelItemComponent,
 		NewChannelComponent,
+		JoinPageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -79,7 +81,8 @@ import {MatDialogModule} from "@angular/material/dialog"
 		MatIconModule,
 		AutosizeModule,
 		ClickOutsideModule,
-		MatDialogModule
+		MatDialogModule,
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
