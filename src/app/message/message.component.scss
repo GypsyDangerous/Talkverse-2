@@ -17,6 +17,28 @@
 .message {
 	display: flex;
 	margin: 1rem 0;
+	padding: .25rem 0;
+	padding-left: 1rem;
+	position: relative;
+	&:hover{
+		background: #04040514;
+		.options{
+			display: flex;
+		}
+	}
+}
+
+.options{
+	position: absolute;
+	right: 5rem;
+	top: 0;
+	transform: translateY(-75%);
+	background: darken(#252329, 3);
+	padding: .25rem;
+	border-radius: .25rem;
+	display: none;
+	align-items: center;
+	cursor: pointer;
 }
 
 .avatar-area {

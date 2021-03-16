@@ -51,9 +51,9 @@ header {
 .message-input {
 	// position: absolute;
 	// bottom: 1rem;
-	margin-right: 1.5rem;
+	margin-left: 1rem;
 	align-self: center;
-	width: 100%;
+	width: calc(100% - 1rem);
 	.input-body {
 		width: 100%;
 		background: #3c393f;
@@ -87,7 +87,9 @@ header {
 
 .channel-area {
 	padding: 1rem 2rem;
+	padding-left: 0;
 	padding-right: 0.5rem;
+	padding-top: 0;
 	display: flex;
 	flex-direction: column;
 	height: 100%;

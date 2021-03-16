@@ -57,6 +57,9 @@ export class SidebarComponent implements OnInit {
 
 	togglePopup() {
 		this.popUpOpen = !this.popUpOpen;
+		setTimeout(() => {
+			document.getElementById("user-popup")?.focus();
+		}, 300);
 	}
 
 	ngOnInit(): void {
