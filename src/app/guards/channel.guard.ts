@@ -11,7 +11,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { AuthService } from "../services/auth.service";
 import { map, switchMap, tap } from "rxjs/operators";
 import { channel } from "utils/types/channel";
-
+import firebase from "firebase/app";
 @Injectable({
 	providedIn: "root",
 })
@@ -22,8 +22,24 @@ export class ChannelGuard implements CanActivate {
 		state: RouterStateSnapshot
 	): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		return this.auth.user$.pipe(
-			map(user => {
-				return user.channels.includes(route.params["id"]);
+			tap(user => {
+				console.log(user.id, route.params.id)
+				return user
+			}),
+			switchMap(user => {
+				return this.firestore
+					.collection("users")
+					.doc(user.id)
+					.collection("channels")
+					.doc(route.params["id"])
+					.valueChanges()
+					.pipe(
+						tap(doc => {
+							console.log(doc);
+							return doc;
+						}),
+						map(doc => !!doc)
+					);
 			})
 		);
 	}

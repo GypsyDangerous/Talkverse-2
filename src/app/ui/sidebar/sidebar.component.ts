@@ -18,6 +18,7 @@ import { ChannelService } from "src/app/services/channel.service";
 import { user } from "utils/types/user";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { NewChannelComponent } from "src/app/new-channel/new-channel.component";
+import { Router } from "@angular/router";
 @Component({
 	selector: "app-sidebar",
 	templateUrl: "./sidebar.component.html",
@@ -34,19 +35,16 @@ export class SidebarComponent implements OnInit {
 		public auth: AuthService,
 		private firestore: AngularFirestore,
 		public channel: ChannelService,
-		public dialog: MatDialog
+		public dialog: MatDialog,
+		private router: Router
 	) {
 		this.channels$ = this.auth.user$.pipe(
-			map(user => user.channels),
-			switchMap(async channels => {
-				let allChannels = [];
-				for (const channelId of channels) {
-					const docRef = firebase.firestore().collection("conversations").doc(channelId);
-					const doc = await docRef.get();
-					const data = { id: doc.id, ...doc.data() } as channel;
-					allChannels.push(data);
-				}
-				return allChannels;
+			switchMap(user => {
+				return this.firestore
+					.collection("users")
+					.doc(user.id)
+					.collection<channel>("channels", ref => ref.orderBy("name", "asc"))
+					.valueChanges({ idField: "id" });
 			})
 		);
 	}
@@ -63,7 +61,10 @@ export class SidebarComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.channels$.subscribe(c => (this.channels = c || []));
+		this.channels$.subscribe(c => {
+			this.channels = c || [];
+			console.log(c);
+		});
 		this.channel.channel$.subscribe(console.log);
 
 		this.members$ = this.channel.channel$.pipe(
@@ -82,7 +83,7 @@ export class SidebarComponent implements OnInit {
 	}
 
 	get filteredChannels() {
-		return this.channels.filter(channel => channel.name.includes(this.searchText));
+		return this.channels.filter(channel => channel.name?.includes(this.searchText));
 	}
 
 	closeMembers() {
@@ -93,15 +94,16 @@ export class SidebarComponent implements OnInit {
 		const dialogRef = this.dialog.open(NewChannelComponent, {
 			width: "40%",
 			data: {
-				name: "",
-				description: "",
+				name: "test server",
+				description: "for testing",
 			},
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
+			console.log(result);
 			if (!result) return;
 
-			this.auth.user$
+			const ref$ = this.auth.user$
 				.pipe(
 					switchMap(async user => {
 						const newChannel: channel = {
@@ -114,13 +116,26 @@ export class SidebarComponent implements OnInit {
 						};
 
 						const doc = await this.firestore
-							.collection("conversations")
+							.collection<channel>("conversations")
 							.add(newChannel);
-						doc.collection("members").doc(user.id).set(user);
+						await doc.collection("members").doc(user.id).set(user);
+
+						return { user, doc, channel: newChannel };
 					}),
 					take(1)
 				)
-				.subscribe();
+				.subscribe(async ({ channel, user, doc }) => {
+					console.log(user.id, doc.id, channel);
+
+					await firebase
+						.firestore()
+						.collection("users")
+						.doc(user.id)
+						.collection("channels")
+						.doc(doc.id)
+						.set(channel);
+					this.router.navigate(["channel", doc.id]);
+				});
 
 			console.log("The dialog was closed, result: " + result);
 		});
