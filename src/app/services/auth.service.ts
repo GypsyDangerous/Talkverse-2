@@ -14,6 +14,7 @@ import { user as User } from "../../../utils/types/user";
 })
 export class AuthService {
 	user$: Observable<User>;
+	userId: string = "";
 	constructor(
 		private afAuth: AngularFireAuth,
 		private firestore: AngularFirestore,
@@ -28,6 +29,10 @@ export class AuthService {
 					.valueChanges({ idField: "id" });
 			})
 		);
+
+		this.user$.subscribe(user => {
+			this.userId = user.id;
+		});
 	}
 
 	async googleSignin() {
@@ -42,17 +47,19 @@ export class AuthService {
 	}
 
 	async logout() {
-		this.signOut()
+		this.signOut();
 	}
 
 	async register(email: string, password: string, username: string) {
 		const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
 		await user.user?.updateProfile({ displayName: username });
-		return await this.firestore.doc(`users/${user.user?.uid}`).set({ username: username }, { merge: true });
+		return await this.firestore
+			.doc(`users/${user.user?.uid}`)
+			.set({ username: username }, { merge: true });
 	}
 
 	async login(email: string, password: string) {
 		const user = await firebase.auth().signInWithEmailAndPassword(email, password);
-		return user
+		return user;
 	}
 }

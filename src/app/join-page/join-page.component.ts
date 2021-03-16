@@ -31,4 +31,6 @@ export class JoinPageComponent implements OnInit {
 	ngOnInit(): void {
 		this.channels$.subscribe(channels => (this.channel = channels[0]));
 	}
+
+	
 }

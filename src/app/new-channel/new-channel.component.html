@@ -23,4 +23,12 @@
 	<input type="text" matInput [(ngModel)]="data.inviteCode" />
 </mat-form-field>
 
-<a *ngIf="data.inviteCode?.length" [routerLink]="['join', data.inviteCode]">Join Channel</a>
+<div mat-dialog-actions>
+	<button
+		mat-raised-button
+		(click)="join()"
+		*ngIf="data.inviteCode?.length"
+	>
+		Join Channel
+	</button>
+</div>
