@@ -44,15 +44,15 @@ export class ChannelComponent implements OnInit {
 					.valueChanges({ idField: "id" });
 			})
 		);
-		this.channel.setChannel(this.channel$)
+		this.channel.setChannel(this.channel$);
 		this.messages$ = this.route.paramMap.pipe(
 			switchMap(params => {
 				const id = params.get("id") as string;
 				return this.firestore
 					.collection("conversations")
 					.doc<channel>(id || " ")
-					.collection<message>("messages", ref => ref.orderBy("created_at", "desc"))
-					.valueChanges();
+					.collection<message>("messages", ref => ref.orderBy("created_at", "asc"))
+					.valueChanges({ idField: "id" });
 			})
 		);
 	}
@@ -73,12 +73,16 @@ export class ChannelComponent implements OnInit {
 		return this.myForm.get("message");
 	}
 
+	async editMessage(message: message){
+		console.log(message.id)
+	}
+
 	async sendMessage() {
 		if (!this.myForm.valid) return;
 		console.log("submitted");
 
 		const raw_text = this.myForm.value.message;
-		console.log(raw_text)
+		console.log(raw_text);
 		this.auth.user$
 			.pipe(
 				tap(user => {
@@ -112,15 +116,18 @@ export class ChannelComponent implements OnInit {
 			)
 			.subscribe(() => {
 				this.myForm.setValue({ message: "" });
+				setTimeout(() => {
+					document.getElementById("scroll-to")?.scrollIntoView();
+				}, 300);
 			});
 	}
 
 	enterSubmit(event: any) {
 		document.getElementById("message-button")?.click();
-		event.preventDefault()
+		event.preventDefault();
 	}
 
-	toggleMembers(){
-		this.channel.showMembers = true
+	toggleMembers() {
+		this.channel.showMembers = true;
 	}
 }

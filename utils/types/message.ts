@@ -12,6 +12,7 @@ export interface message {
 	parsed_text: string,
 	attachments: attachment[],
 	read_by: string[],
-	conversation_id: string,
+	channelId: string,
 	created_at: number
+	id: string
 }

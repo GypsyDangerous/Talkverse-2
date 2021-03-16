@@ -14,10 +14,10 @@
 	height: 40px;
 }
 
-.messages {
+.scroll-container {
+	overflow: auto;
 	display: flex;
 	flex-direction: column-reverse;
-	overflow: auto;
 	&::-webkit-scrollbar {
 		width: 0.5rem;
 	}
@@ -30,6 +30,11 @@
 		border-radius: 100vh;
 		background: #120f13;
 	}
+}
+
+.messages {
+	// display: flex;
+	// flex-direction: column;
 }
 
 header {

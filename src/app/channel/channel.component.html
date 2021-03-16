@@ -13,10 +13,13 @@
 		></ngx-skeleton-loader>
 	</header>
 	<div class="channel-area">
-		<div class="messages">
-			<div class="spinner-container" *ngIf="loading; else messages">
-				<app-loading-spinner></app-loading-spinner>
-			</div>
+		<div class="scroll-container">
+			<ul class="messages" id="message-container">
+				<div class="spinner-container" *ngIf="loading; else messages">
+					<app-loading-spinner></app-loading-spinner>
+				</div>
+				<div id="scroll-to"></div>
+			</ul>
 		</div>
 
 		<form
@@ -33,7 +36,7 @@
 					rows="1"
 					name="message"
 					id="message"
-					[placeholder]="'Message #'+(channel$ |async)?.name"
+					[placeholder]="'Message #' + (channel$ | async)?.name"
 				></textarea>
 				<button type="submit" id="message-button"><mat-icon>send</mat-icon></button>
 			</div>
@@ -42,7 +45,9 @@
 </main>
 
 <ng-template #name
-	><h1 class="channel-header-text" (click)="toggleMembers()">{{ (channel$ | async)?.name }}</h1></ng-template
+	><h1 class="channel-header-text" (click)="toggleMembers()">
+		{{ (channel$ | async)?.name }}
+	</h1></ng-template
 >
 
 <ng-template #messages>
