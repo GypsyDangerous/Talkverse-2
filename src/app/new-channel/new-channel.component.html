@@ -1,31 +1,37 @@
 <div class="modal-container">
-	<h1>Create Channel</h1>
+	<div class="create-channel channel-seciont">
 
-	<mat-form-field appearance="outline">
-		<mat-label>Name</mat-label>
-		<input type="text" matInput [(ngModel)]="data.name" />
-	</mat-form-field>
-
-	<mat-form-field appearance="outline">
-		<mat-label>Description</mat-label>
-		<textarea autosize matInput [(ngModel)]="data.description"></textarea>
-	</mat-form-field>
-
-	<div mat-dialog-actions>
-		<button [mat-dialog-close]="data">Create Channel</button>
+		<h1>Create Channel</h1>
+	
+		<mat-form-field appearance="outline">
+			<mat-label>Name</mat-label>
+			<input type="text" matInput [(ngModel)]="data.name" />
+		</mat-form-field>
+	
+		<mat-form-field appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea autosize matInput [(ngModel)]="data.description"></textarea>
+		</mat-form-field>
+	
+		<div mat-dialog-actions>
+			<button [mat-dialog-close]="data" color="primary" mat-raised-button>Create Channel</button>
+		</div>
 	</div>
 
+	<div class="join-channel channel-section">
+		
+	</div>
 	<p>Or</p>
 
 	<h1>Join a channel</h1>
 
-	<mat-form-field>
+	<mat-form-field appearance="outline">
 		<mat-label>Name</mat-label>
 		<input type="text" matInput [(ngModel)]="data.inviteCode" />
 	</mat-form-field>
 
 	<div mat-dialog-actions>
-		<button mat-raised-button (click)="join()" *ngIf="data.inviteCode?.length">
+		<button mat-raised-button color="primary" (click)="join()">
 			Join Channel
 		</button>
 	</div>
