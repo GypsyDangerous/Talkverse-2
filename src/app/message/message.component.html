@@ -1,10 +1,10 @@
 <div class="message" [id]="this.message.id" (mouseleave)="closeOptions()">
 	<div class="avatar-area">
-		<img width="42" height="42" [src]="(this.sender$ | async)?.avatar" alt="" />
+		<img width="42" height="42" [src]="this.message.sender.avatar" alt="" />
 	</div>
 	<div class="text-area">
 		<div class="header-area">
-			<span class="username">{{ (this.sender$ | async)?.username }}</span>
+			<span class="username">{{ this.message.sender.username }}</span>
 			<span class="timestamp">{{ this.timestamp }}</span>
 		</div>
 		<div
