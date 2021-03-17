@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import { uid } from "uid";
 
 export const aggregateChannelsCreate = functions.firestore
 	.document("conversations/{channelId}/members/{memberId}")
@@ -25,4 +26,16 @@ export const aggregateChannelsDelete = functions.firestore
 			{ channels: admin.firestore.FieldValue.arrayRemove(channelId) },
 			{ merge: true }
 		);
+	});
+
+export const generateInviteCodes = functions.firestore
+	.document("conversations/{channelId}")
+	.onCreate((snapshot, context) => {
+		const { channeId } = context.params;
+
+		const docRef = admin.firestore().collection("conversations").doc(channeId);
+
+		const inviteCodes = [...Array(10)].map(() => uid());
+
+		return docRef.update({inviteCodes})
 	});
