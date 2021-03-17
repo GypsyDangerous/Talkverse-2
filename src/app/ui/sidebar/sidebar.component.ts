@@ -19,6 +19,8 @@ import { user } from "utils/types/user";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { NewChannelComponent } from "src/app/new-channel/new-channel.component";
 import { Router } from "@angular/router";
+import { UserSettingsComponent } from "src/app/user-settings/user-settings.component";
+import { ProfileComponent, UserProfileData } from "src/app/profile/profile.component";
 @Component({
 	selector: "app-sidebar",
 	templateUrl: "./sidebar.component.html",
@@ -29,7 +31,6 @@ export class SidebarComponent implements OnInit {
 	channels: channel[] = [];
 	popUpOpen: boolean = false;
 	searchText: string = "";
-	members$: Observable<user[] | undefined>;
 
 	constructor(
 		public auth: AuthService,
@@ -66,16 +67,6 @@ export class SidebarComponent implements OnInit {
 			console.log(c);
 		});
 		this.channel.channel$.subscribe(console.log);
-
-		this.members$ = this.channel.channel$.pipe(
-			switchMap(channel => {
-				return this.firestore
-					.collection("conversations")
-					.doc(channel?.id)
-					.collection<user>("members", ref => ref.orderBy("username", "asc"))
-					.valueChanges();
-			})
-		);
 	}
 
 	search(event: any) {
@@ -90,7 +81,26 @@ export class SidebarComponent implements OnInit {
 		this.channel.showMembers = false;
 	}
 
-	openDialog(): void {
+	openSettings(): void {
+		this.auth.user$.pipe(take(1)).subscribe(user => {
+			const dialogRef = this.dialog.open(ProfileComponent, {
+				width: "40%",
+				data: {
+					username: user.username,
+					avatar: user.avatar,
+				},
+			});
+
+			dialogRef.afterClosed().subscribe((result: UserProfileData) => {
+				// update user profile
+				this.auth.user$.pipe(take(1)).subscribe(user => {
+					this.firestore.collection("users").doc(user.id).update(result);
+				});
+			});
+		});
+	}
+
+	addChannel(): void {
 		const dialogRef = this.dialog.open(NewChannelComponent, {
 			width: "40%",
 			data: {

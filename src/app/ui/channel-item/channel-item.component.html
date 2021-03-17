@@ -1,5 +1,5 @@
 <li>
-	<a *ngIf="!this.noLink; else noLink" class="channel-link" routerLinkActive="active" [routerLink]="this.channel.id">
+	<a *ngIf="!this.dontLink; else noLink" class="channel-link" routerLinkActive="active" [routerLink]="this.channel.id">
 		<div class="icon">
 			{{ this.initials }}
 		</div>

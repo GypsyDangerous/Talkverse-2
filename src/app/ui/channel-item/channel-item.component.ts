@@ -8,7 +8,7 @@ import { channel } from "utils/types/channel";
 })
 export class ChannelItemComponent implements OnInit {
 	@Input() channel: channel;
-	@Input() noLink: boolean;
+	@Input() dontLink: boolean = false;
 	constructor() {}
 
 	ngOnInit(): void {}

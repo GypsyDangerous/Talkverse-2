@@ -26,6 +26,7 @@
     "firebase": "^7.0 || ^8.0",
     "ng-click-outside": "^7.0.1",
     "ngx-autosize": "^1.8.4",
+    "ngx-dropzone": "^3.0.0",
     "ngx-skeleton-loader": "^2.9.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -36,7 +36,8 @@ import { ChannelItemComponent } from './ui/channel-item/channel-item.component';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { NewChannelComponent } from './new-channel/new-channel.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { JoinPageComponent } from './join-page/join-page.component'
+import { JoinPageComponent } from './join-page/join-page.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component'
 
 
 
@@ -61,6 +62,7 @@ import { JoinPageComponent } from './join-page/join-page.component'
 		ChannelItemComponent,
 		NewChannelComponent,
 		JoinPageComponent,
+		UserSettingsComponent,
 	],
 	imports: [
 		BrowserModule,

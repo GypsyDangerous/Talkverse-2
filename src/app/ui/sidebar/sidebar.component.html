@@ -15,7 +15,9 @@
 		<div tabindex="100" *ngIf="this.popUpOpen" id="user-popup" class="pop-up">
 			<ul class="top list">
 				<li>
-					<button mat-button><mat-icon>account_circle</mat-icon> Profile</button>
+					<button mat-button (click)="openSettings()">
+						<mat-icon>account_circle</mat-icon> Profile
+					</button>
 				</li>
 			</ul>
 			<hr />
@@ -43,6 +45,7 @@
 	</div>
 	<ul class="channels">
 		<channel-item
+		[dontLink]="false"
 			*ngFor="let channel of this.filteredChannels"
 			[channel]="channel"
 		></channel-item>
@@ -51,7 +54,7 @@
 
 <ng-template #channelHeader>
 	<h1>Channels</h1>
-	<button mat-button (click)="openDialog()"><mat-icon>add</mat-icon></button>
+	<button mat-button (click)="addChannel()"><mat-icon>add</mat-icon></button>
 </ng-template>
 
 <ng-template #memberHeader>
@@ -67,7 +70,7 @@
 	<p class="description">{{ (this.channel.channel$ | async)?.description }}</p>
 	<h2 class="members-title">Members</h2>
 	<ul class="channels">
-		<li *ngFor="let member of this.members$ | async" class="channel-member">
+		<li *ngFor="let member of this.channel.members$ | async"  class="channel-member">
 			<img [src]="member.avatar" alt="" width="42" height="42" />
 			<span>{{ member.username }}</span>
 		</li>

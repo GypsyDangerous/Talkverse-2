@@ -6,12 +6,16 @@ import { switchMap, take, tap } from "rxjs/operators";
 import { channel } from "utils/types/channel";
 import { AuthService } from "./auth.service";
 import firebase from "firebase/app";
+import { user } from "utils/types/user";
 @Injectable({
 	providedIn: "root",
 })
 export class ChannelService {
 	channel$: Observable<channel | undefined>;
 	showMembers: boolean;
+	members$: Observable<user[] | undefined>;
+	members: user[];
+
 	constructor(
 		private route: ActivatedRoute,
 		private auth: AuthService,
@@ -21,6 +25,15 @@ export class ChannelService {
 
 	setChannel(channel: Observable<channel | undefined>) {
 		this.channel$ = channel;
+		this.members$ = this.channel$.pipe(
+			switchMap(channel => {
+				return this.firestore
+					.collection("conversations")
+					.doc(channel?.id)
+					.collection<user>("members", ref => ref.orderBy("username", "asc"))
+					.valueChanges();
+			})
+		);
 	}
 
 	async join(inviteCode: string, cancel: () => void) {

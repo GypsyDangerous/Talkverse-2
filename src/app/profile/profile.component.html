@@ -1,1 +1,13 @@
-<p>profile works!</p>
+<img [src]="data.avatar" alt="" width="96" height="96" (click)="openFile()" />
+
+<mat-form-field>
+	<mat-label>Username</mat-label>
+	<input matInput [(ngModel)]="data.username" />
+</mat-form-field>
+
+<div mat-dialog-actions>
+	<button mat-raised-button color="primary" [mat-dialog-close]="data">Save</button>
+	<button mat-raised-button color="warn">Cancel</button>
+</div>
+
+<input type="file" class="hidden" id="pfp-selector" (change)="handleFileInput($event)" />
