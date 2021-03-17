@@ -1,2 +1,6 @@
-<p>join-page works!</p>
-<pre>{{this.channel | json}}</pre>
+<div class="outer-body">
+	<div class="inner-body">
+		<channel-item [channel]="this.channel" [noLink]="true"></channel-item>
+		<button mat-raised-button color="primary" (click)="join()">Join</button>
+	</div>
+</div>

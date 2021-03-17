@@ -1,0 +1,19 @@
+.outer-body{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	li{
+		list-style: none;
+	}
+	.inner-body{
+		background: #120f13;
+		padding: 2rem;
+		border-radius: .5rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 2rem;
+	}
+}

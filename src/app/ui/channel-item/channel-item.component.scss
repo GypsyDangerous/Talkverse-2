@@ -1,4 +1,4 @@
-a {
+.channel-link {
 	text-decoration: none;
 	color: white;
 	display: flex;
@@ -49,4 +49,8 @@ a {
 	height: 42px;
 	display: flex;
 	align-items: center;
+}
+
+li{
+	list-style: none;
 }

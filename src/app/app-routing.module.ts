@@ -50,7 +50,7 @@ const routes: Routes = [
 		],
 	},
 	{
-		path: "join/:code",
+		path: "invite/:code",
 		component: JoinPageComponent,
 	},
 ];
