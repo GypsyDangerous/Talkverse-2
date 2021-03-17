@@ -12,7 +12,7 @@
 		<button (click)="this.togglePopup()" class="chevron-button">
 			<mat-icon>keyboard_arrow_up</mat-icon>
 		</button>
-		<div tabindex="100" (blur)="closePopup()" *ngIf="this.popUpOpen" id="user-popup" class="pop-up">
+		<div tabindex="100" *ngIf="this.popUpOpen" id="user-popup" class="pop-up">
 			<ul class="top list">
 				<li>
 					<button mat-button><mat-icon>account_circle</mat-icon> Profile</button>

@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 
 export const createUserDoc = functions.auth.user().onCreate(async user => {
 	const userDoc: any = {
-		photoURL: user.photoURL ?? "/avatar.png",
+		avatar: user.photoURL ?? "/avatar.png",
 		email: user.email,
 		status: "",
 		channels: [],

@@ -25,7 +25,7 @@ export class NewChannelComponent implements OnInit {
 		@Inject(MAT_DIALOG_DATA) public data: NewChannelData,
 		private firestore: AngularFirestore,
 		private auth: AuthService,
-		private router: Router,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {}
@@ -41,27 +41,30 @@ export class NewChannelComponent implements OnInit {
 			.limit(1);
 		const collection = await filteredCollection.get();
 		const channel = collection.docs[0];
-
+		console.log({channel});
 		this.auth.user$
 			.pipe(
 				tap(async user => {
+					console.log(user)
 					await firebase
 						.firestore()
 						.collection("users")
 						.doc(user.id)
-						.update({ channels: firebase.firestore.FieldValue.arrayUnion(channel.id) });
+						.collection("channels")
+						.doc(channel.id)
+						.set(channel.data());
 					await collectionRef
 						.doc(channel.id)
 						.collection("members")
 						.doc(user.id)
 						.set(user);
-					return true
+					return true;
 				}),
 				take(1)
 			)
 			.subscribe(() => {
-				this.router.navigate(["channel", channel.id])
-				this.cancel()
+				this.router.navigate(["channel", channel.id]);
+				this.cancel();
 			});
 	}
 }

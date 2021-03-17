@@ -40,18 +40,19 @@ const routes: Routes = [
 	{
 		path: "channel",
 		component: ChannelParentComponent,
+		canActivate: [AuthenticatedGuard],
 		children: [
 			{
 				path: ":id",
 				component: ChannelComponent,
-				canActivate: [AuthenticatedGuard, ChannelGuard],
+				canActivate: [ChannelGuard],
 			},
 		],
 	},
 	{
 		path: "join/:code",
 		component: JoinPageComponent,
-	}
+	},
 ];
 
 @NgModule({

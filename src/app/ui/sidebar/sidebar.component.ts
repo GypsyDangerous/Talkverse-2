@@ -94,8 +94,8 @@ export class SidebarComponent implements OnInit {
 		const dialogRef = this.dialog.open(NewChannelComponent, {
 			width: "40%",
 			data: {
-				name: "test server",
-				description: "for testing",
+				name: "",
+				description: "",
 			},
 		});
 
