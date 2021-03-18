@@ -2,7 +2,7 @@
 	"hosting": [
 		{
 			"target": "chat-app",
-			"public": "dist/chat-app",
+			"public": "./dist/chat-app",
 			"ignore": ["**/.*"],
 			"headers": [
 				{
@@ -17,7 +17,7 @@
 			],
 			"rewrites": [
 				{
-					"source": "!{/bower_components,/src}/**",
+					"source": "**",
 					"destination": "/index.html"
 				}
 			]
