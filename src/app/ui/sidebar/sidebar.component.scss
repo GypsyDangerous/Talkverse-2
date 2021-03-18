@@ -3,6 +3,14 @@
 	width: 325px;
 	transition: 0.25s transform;
 	transform-origin: top left;
+	position: inherit;
+	.close-button{
+		display: none;
+		position: absolute;
+		top: .5rem;
+		right: -45px;
+		background: var(--dark-black);
+	}
 	@media screen and (max-width: 425px) {
 		max-width: 85vw;
 		transform: scaleX(0);
@@ -10,6 +18,9 @@
 		top: 0;
 		left: 0;
 		z-index: 100;
+		.close-button{
+			display: block;
+		}
 		&.open {
 			transform: scaleX(1);
 		}

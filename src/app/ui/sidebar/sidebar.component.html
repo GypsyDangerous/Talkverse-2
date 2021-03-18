@@ -1,4 +1,7 @@
 <div class="sidebar-parent" [class.open]="this.drawerManager.drawerOpen">
+	<button mat-icon-button (click)="this.drawerManager.closeDrawer()" class="close-button">
+		<mat-icon>close</mat-icon>
+	</button>
 	<header class="section-header">
 		<div *ngIf="this.channel.showMembers; then memberHeader; else channelHeader"></div>
 	</header>
