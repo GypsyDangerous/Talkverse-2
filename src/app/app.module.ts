@@ -39,7 +39,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { JoinPageComponent } from './join-page/join-page.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component'
 
-
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 
@@ -85,6 +85,7 @@ import { UserSettingsComponent } from './user-settings/user-settings.component'
 		ClickOutsideModule,
 		MatDialogModule,
 		FormsModule,
+		LayoutModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

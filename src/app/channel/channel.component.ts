@@ -10,6 +10,7 @@ import { AuthService } from "../services/auth.service";
 import firebase from "firebase/app";
 import { sanitizeHtml } from "utils/functions/string";
 import { ChannelService } from "../services/channel.service";
+import { DrawerService } from "../services/drawer.service";
 
 const defaultMessageForm = {
 	message: ["", [Validators.required]],
@@ -33,7 +34,8 @@ export class ChannelComponent implements OnInit {
 		private router: Router,
 		private builder: FormBuilder,
 		private auth: AuthService,
-		private channel: ChannelService
+		private channel: ChannelService,
+		public drawerManager: DrawerService
 	) {
 		this.channel$ = this.route.paramMap.pipe(
 			switchMap(params => {
@@ -73,8 +75,8 @@ export class ChannelComponent implements OnInit {
 		return this.myForm.get("message");
 	}
 
-	async editMessage(message: message){
-		console.log(message.id)
+	async editMessage(message: message) {
+		console.log(message.id);
 	}
 
 	async sendMessage() {

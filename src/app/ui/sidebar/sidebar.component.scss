@@ -1,6 +1,19 @@
 .sidebar-parent {
 	max-width: 325px;
 	width: 325px;
+	transition: 0.25s transform;
+	transform-origin: top left;
+	@media screen and (max-width: 425px) {
+		max-width: 85vw;
+		transform: scaleX(0);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		&.open {
+			transform: scaleX(1);
+		}
+	}
 	min-height: 100vh;
 	background: var(--light-black);
 	display: flex;
@@ -131,10 +144,10 @@ footer {
 	}
 }
 
-.members-header-section{
+.members-header-section {
 	display: flex;
 	align-items: center;
-	mat-icon{
-		margin-right: .5ch;
+	mat-icon {
+		margin-right: 0.5ch;
 	}
 }

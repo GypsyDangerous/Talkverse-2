@@ -21,6 +21,7 @@ import { NewChannelComponent } from "src/app/new-channel/new-channel.component";
 import { Router } from "@angular/router";
 import { UserSettingsComponent } from "src/app/user-settings/user-settings.component";
 import { ProfileComponent, UserProfileData } from "src/app/profile/profile.component";
+import { DrawerService } from "src/app/services/drawer.service";
 @Component({
 	selector: "app-sidebar",
 	templateUrl: "./sidebar.component.html",
@@ -38,7 +39,8 @@ export class SidebarComponent implements OnInit {
 		private firestore: AngularFirestore,
 		public channel: ChannelService,
 		public dialog: MatDialog,
-		private router: Router
+		private router: Router,
+		public drawerManager: DrawerService
 	) {
 		this.channels$ = this.auth.user$.pipe(
 			switchMap(user => {

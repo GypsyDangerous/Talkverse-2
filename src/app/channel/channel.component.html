@@ -1,5 +1,6 @@
 <main class="channel">
 	<header class="section-header">
+		<img class="hamburger" (click)="this.drawerManager.openDrawer()" src="assets/hamburger_icon.svg" alt="" />
 		<ngx-skeleton-loader
 			*ngIf="loading; else name"
 			[theme]="{

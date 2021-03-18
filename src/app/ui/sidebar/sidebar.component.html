@@ -1,4 +1,4 @@
-<div class="sidebar-parent">
+<div class="sidebar-parent" [class.open]="this.drawerManager.drawerOpen">
 	<header class="section-header">
 		<div *ngIf="this.channel.showMembers; then memberHeader; else channelHeader"></div>
 	</header>
@@ -45,7 +45,7 @@
 	</div>
 	<ul class="channels">
 		<channel-item
-		[dontLink]="false"
+			[dontLink]="false"
 			*ngFor="let channel of this.filteredChannels"
 			[channel]="channel"
 		></channel-item>
@@ -70,7 +70,7 @@
 	<p class="description">{{ (this.channel.channel$ | async)?.description }}</p>
 	<h2 class="members-title">Members</h2>
 	<ul class="channels">
-		<li *ngFor="let member of this.channel.members$ | async"  class="channel-member">
+		<li *ngFor="let member of this.channel.members$ | async" class="channel-member">
 			<img [src]="member.avatar" alt="" width="42" height="42" />
 			<span>{{ member.username }}</span>
 		</li>
