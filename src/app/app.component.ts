@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./services/auth.service";
+import { MessagingService } from "./services/messaging.service";
 
 @Component({
 	selector: "app-root",
@@ -7,11 +8,10 @@ import { AuthService } from "./services/auth.service";
 	styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-	constructor(public auth: AuthService) {}
+	constructor(public auth: AuthService, public messaging: MessagingService) {}
 
 	ngOnInit(): void {
-		this.auth.user$.subscribe(console.log)
+		this.auth.user$.subscribe(console.log);
+		this.messaging.getPermission().subscribe(console.log);
 	}
-
 }
-

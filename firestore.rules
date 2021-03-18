@@ -8,12 +8,13 @@ service cloud.firestore {
 	
 	match /conversations/{channelId} {
 		allow read: if true;
+		allow create: if signedIn();
 		allow write: if isOwner(resource.data.owner.id);
 
 		match /messages/{messageId} {
 			allow read: if true;
-			allow write: if isOwner(resource.data.sender.id);
 			allow create: if signedIn();
+			allow write: if isOwner(resource.data.sender.id);
 		}
 
 		match /members/{memberId} {

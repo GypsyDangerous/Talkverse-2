@@ -11,6 +11,7 @@ import firebase from "firebase/app";
 import { sanitizeHtml } from "utils/functions/string";
 import { ChannelService } from "../services/channel.service";
 import { DrawerService } from "../services/drawer.service";
+import { MessagingService } from "../services/messaging.service";
 
 const defaultMessageForm = {
 	message: ["", [Validators.required]],
@@ -35,7 +36,8 @@ export class ChannelComponent implements OnInit {
 		private builder: FormBuilder,
 		private auth: AuthService,
 		private channel: ChannelService,
-		public drawerManager: DrawerService
+		public drawerManager: DrawerService,
+		public messaging: MessagingService
 	) {
 		this.channel$ = this.route.paramMap.pipe(
 			switchMap(params => {
@@ -44,6 +46,11 @@ export class ChannelComponent implements OnInit {
 					.collection("conversations")
 					.doc<channel>(id || " ")
 					.valueChanges({ idField: "id" });
+			}),
+			tap(channel => {
+				if (channel) {
+					this.messaging.sub(channel.id);
+				}
 			})
 		);
 		this.channel.setChannel(this.channel$);

@@ -13,6 +13,8 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireFunctionsModule } from "@angular/fire/functions";
+import { AngularFireMessagingModule } from "@angular/fire/messaging";
 import { environment } from "../environments/environment";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -32,18 +34,15 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { MessageComponent } from "./message/message.component";
 import { MatIconModule } from "@angular/material/icon";
 import { AutosizeModule } from "ngx-autosize";
-import { ChannelItemComponent } from './ui/channel-item/channel-item.component';
-import { ClickOutsideModule } from 'ng-click-outside';
-import { NewChannelComponent } from './new-channel/new-channel.component';
-import {MatDialogModule} from "@angular/material/dialog";
-import { JoinPageComponent } from './join-page/join-page.component';
-import { UserSettingsComponent } from './user-settings/user-settings.component'
+import { ChannelItemComponent } from "./ui/channel-item/channel-item.component";
+import { ClickOutsideModule } from "ng-click-outside";
+import { NewChannelComponent } from "./new-channel/new-channel.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { JoinPageComponent } from "./join-page/join-page.component";
+import { UserSettingsComponent } from "./user-settings/user-settings.component";
 
-import { LayoutModule } from '@angular/cdk/layout';
-import { ServiceWorkerModule } from '@angular/service-worker';
-
-
-
+import { LayoutModule } from "@angular/cdk/layout";
+import { ServiceWorkerModule } from "@angular/service-worker";
 
 @NgModule({
 	declarations: [
@@ -87,7 +86,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 		MatDialogModule,
 		FormsModule,
 		LayoutModule,
-		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+		AngularFireFunctionsModule,
+		AngularFireMessagingModule,
+		ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production }),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

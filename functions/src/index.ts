@@ -10,6 +10,7 @@ export * from "./aggregateMessages";
 export * from "./onSignUp";
 export * from "./users";
 export * from "./conversations"
+export * from "./messaging"
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //

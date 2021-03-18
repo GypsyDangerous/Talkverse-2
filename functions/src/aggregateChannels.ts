@@ -36,6 +36,7 @@ export const generateInviteCodes = functions.firestore
 		const docRef = admin.firestore().collection("conversations").doc(channelId);
 
 		const inviteCodes = [...Array(10)].map(() => uid());
+		functions.logger.debug(inviteCodes)
 
 		return docRef.update({inviteCodes})
 	});
