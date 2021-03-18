@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+	"deploy:firebase": "ng build --prod && firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@angular/platform-browser": "~11.2.3",
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
+    "@angular/service-worker": "^11.2.6",
     "date-fns": "^2.19.0",
     "firebase": "^7.0 || ^8.0",
     "ng-click-outside": "^7.0.1",

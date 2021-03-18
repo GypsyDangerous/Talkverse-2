@@ -40,6 +40,7 @@ import { JoinPageComponent } from './join-page/join-page.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component'
 
 import { LayoutModule } from '@angular/cdk/layout';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -85,7 +86,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 		ClickOutsideModule,
 		MatDialogModule,
 		FormsModule,
-		LayoutModule
+		LayoutModule,
+		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 	],
 	providers: [],
 	bootstrap: [AppComponent],
