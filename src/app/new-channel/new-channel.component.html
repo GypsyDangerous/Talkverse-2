@@ -1,38 +1,38 @@
 <div class="modal-container">
-	<div class="create-channel channel-seciont">
-
+	<div class="create-channel channel-section">
 		<h1>Create Channel</h1>
-	
-		<mat-form-field appearance="outline">
+
+		<mat-form-field appearance="outline" color="secondary">
 			<mat-label>Name</mat-label>
 			<input type="text" matInput [(ngModel)]="data.name" />
 		</mat-form-field>
-	
+
 		<mat-form-field appearance="outline">
 			<mat-label>Description</mat-label>
 			<textarea autosize matInput [(ngModel)]="data.description"></textarea>
 		</mat-form-field>
-	
+
 		<div mat-dialog-actions>
-			<button [mat-dialog-close]="data" color="primary" mat-raised-button>Create Channel</button>
+			<button [mat-dialog-close]="data" color="primary" mat-raised-button>
+				Create Channel
+			</button>
 		</div>
 	</div>
 
+	<p class="or">
+		<span>------------------------------------</span> Or
+		<span>------------------------------------</span>
+	</p>
 	<div class="join-channel channel-section">
-		
-	</div>
-	<p>Or</p>
+		<h1>Join a channel</h1>
 
-	<h1>Join a channel</h1>
+		<mat-form-field appearance="outline">
+			<mat-label>Invite Code</mat-label>
+			<input type="text" matInput [(ngModel)]="data.inviteCode" />
+		</mat-form-field>
 
-	<mat-form-field appearance="outline">
-		<mat-label>Name</mat-label>
-		<input type="text" matInput [(ngModel)]="data.inviteCode" />
-	</mat-form-field>
-
-	<div mat-dialog-actions>
-		<button mat-raised-button color="primary" (click)="join()">
-			Join Channel
-		</button>
+		<div mat-dialog-actions>
+			<button mat-raised-button color="primary" (click)="join()">Join Channel</button>
+		</div>
 	</div>
 </div>

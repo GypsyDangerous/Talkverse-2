@@ -104,3 +104,30 @@ img.emoji {
 .hidden{
 	display: none;
 }
+
+.inputs{
+	.mat-form-field-wrapper{
+		padding-bottom: 0;
+	}
+}
+
+img{
+	border-radius: .5rem;
+}
+
+.dialog-responsive {
+    width: 375px;
+	&.big{
+		width: 40%;
+		@media screen and (max-width: 800px) {
+			width: 80%;
+		}
+	}
+	max-width: 100vw !important;
+}
+
+@media only screen and (max-width: 375px) {
+    .dialog-responsive {
+        width: 100vw !important;
+    }
+}

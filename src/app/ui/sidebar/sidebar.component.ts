@@ -31,6 +31,7 @@ export class SidebarComponent implements OnInit {
 	channels: channel[] = [];
 	popUpOpen: boolean = false;
 	searchText: string = "";
+	profilePicture: string = "";
 
 	constructor(
 		public auth: AuthService,
@@ -48,6 +49,11 @@ export class SidebarComponent implements OnInit {
 					.valueChanges({ idField: "id" });
 			})
 		);
+
+		this.auth.user$.subscribe(user => {
+			this.profilePicture = `${user.avatar}&v="${Math.random()}"`;
+			console.log(user.avatar, this.profilePicture);
+		});
 	}
 
 	closePopup() {
@@ -84,7 +90,9 @@ export class SidebarComponent implements OnInit {
 	openSettings(): void {
 		this.auth.user$.pipe(take(1)).subscribe(user => {
 			const dialogRef = this.dialog.open(ProfileComponent, {
-				width: "40%",
+				// width: "20%",
+				// maxWidth: "425px",
+				panelClass: "dialog-responsive",
 				data: {
 					username: user.username,
 					avatar: user.avatar,
@@ -102,7 +110,7 @@ export class SidebarComponent implements OnInit {
 
 	addChannel(): void {
 		const dialogRef = this.dialog.open(NewChannelComponent, {
-			width: "40%",
+			panelClass: ["dialog-responsive", "big"],
 			data: {
 				name: "",
 				description: "",

@@ -1,13 +1,19 @@
-<img [src]="data.avatar" alt="" width="96" height="96" (click)="openFile()" />
+<div class="profile-area">
+	<div class="inputs">
+		<div class="img-selector" (click)="openFile()">
+			<img [src]="data.avatar" alt="" width="96" height="96" />
+		</div>
 
-<mat-form-field>
-	<mat-label>Username</mat-label>
-	<input matInput [(ngModel)]="data.username" />
-</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label>Username</mat-label>
+			<input matInput [(ngModel)]="data.username" />
+		</mat-form-field>
+	</div>
 
-<div mat-dialog-actions>
-	<button mat-raised-button color="primary" [mat-dialog-close]="data">Save</button>
-	<button mat-raised-button color="warn">Cancel</button>
+	<div mat-dialog-actions>
+		<button mat-raised-button color="primary" [mat-dialog-close]="data">Save</button>
+		<button mat-raised-button color="warn">Cancel</button>
+	</div>
+
+	<input type="file" class="hidden" id="pfp-selector" (change)="handleFileInput($event)" />
 </div>
-
-<input type="file" class="hidden" id="pfp-selector" (change)="handleFileInput($event)" />

@@ -7,7 +7,7 @@
 	</main>
 
 	<footer>
-		<img width="42" height="42" [src]="(this.auth.user$ | async)?.avatar" alt="" />
+		<img width="42" height="42" [src]="this.profilePicture" alt="" />
 		<span>{{ (this.auth.user$ | async)?.username }}</span>
 		<button (click)="this.togglePopup()" class="chevron-button">
 			<mat-icon>keyboard_arrow_up</mat-icon>
