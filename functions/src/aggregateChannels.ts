@@ -31,9 +31,9 @@ export const aggregateChannelsDelete = functions.firestore
 export const generateInviteCodes = functions.firestore
 	.document("conversations/{channelId}")
 	.onCreate((snapshot, context) => {
-		const { channeId } = context.params;
+		const { channelId } = context.params;
 
-		const docRef = admin.firestore().collection("conversations").doc(channeId);
+		const docRef = admin.firestore().collection("conversations").doc(channelId);
 
 		const inviteCodes = [...Array(10)].map(() => uid());
 
