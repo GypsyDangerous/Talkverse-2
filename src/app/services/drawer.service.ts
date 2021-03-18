@@ -15,6 +15,7 @@ export class DrawerService {
 				if (state.matches) {
 					this.showHamburger = true;
 				} else {
+					this.closeDrawer()
 					this.showHamburger = false;
 				}
 			});
