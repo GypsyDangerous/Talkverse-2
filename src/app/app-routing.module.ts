@@ -16,7 +16,7 @@ import { ChannelParentComponent } from "./channel-parent/channel-parent.componen
 import { JoinPageComponent } from "./join-page/join-page.component";
 
 const routes: Routes = [
-	{ path: "", pathMatch: "full", component: HomeComponent },
+	{ path: "", pathMatch: "full", redirectTo: "/channel" },
 	{
 		path: "auth",
 		component: AuthComponent,
