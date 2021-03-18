@@ -1,5 +1,5 @@
 .header-area {
-	color: #828282;
+	color: var(--text-light-grey);
 	.timestamp {
 		font-weight: 500;
 		font-size: 14px;
@@ -21,7 +21,7 @@
 	padding-left: 1rem;
 	position: relative;
 	&:hover {
-		background: #04040514;
+		background: var(--backdrop);
 		.options {
 			display: flex;
 		}
@@ -38,13 +38,12 @@
 	}
 	button {
 		min-width: 24px;
-		background: darken(#252329, 5);
+		background: var(--medium-black);
 		padding: 0.25rem;
 		border-radius: 0.25rem;
 		align-items: center;
 		cursor: pointer;
 		line-height: normal;
-		// background: #120f13;
 	}
 	display: none;
 }

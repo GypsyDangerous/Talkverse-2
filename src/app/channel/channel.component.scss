@@ -28,14 +28,10 @@
 
 	&::-webkit-scrollbar-thumb {
 		border-radius: 100vh;
-		background: #120f13;
+		background: var(--light-black);
 	}
 }
 
-.messages {
-	// display: flex;
-	// flex-direction: column;
-}
 
 header {
 	h1 {
@@ -45,7 +41,7 @@ header {
 		font-size: 1rem;
 
 		text-transform: uppercase;
-		color: #e0e0e0;
+		color: white;
 		letter-spacing: 0.1rem;
 	}
 	padding: 1.8rem;
@@ -61,14 +57,14 @@ header {
 	width: calc(100% - 1rem);
 	.input-body {
 		width: 100%;
-		background: #3c393f;
+		background: var(--light-grey);
 		padding: 0.5rem;
 		border-radius: 0.5rem;
 		button {
 			border-radius: 0.5rem;
 			border: none;
 			outline: none;
-			background: #2f80ed;
+			background: var(--secondary);
 			color: white;
 			height: 40px;
 			width: 40px;

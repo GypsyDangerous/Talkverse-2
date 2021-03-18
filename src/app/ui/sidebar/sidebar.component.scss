@@ -2,7 +2,7 @@
 	max-width: 325px;
 	width: 325px;
 	min-height: 100vh;
-	background: #120f13;
+	background: var(--light-black);
 	display: flex;
 	position: relative;
 	flex-direction: column;
@@ -27,7 +27,7 @@ header {
 		margin: 0;
 	}
 	button {
-		background: #252329;
+		background: var(--icon-grey);
 		min-width: 32px;
 		height: 32px;
 		display: flex;
@@ -44,7 +44,7 @@ footer {
 	align-items: center;
 	height: 75px;
 	width: 100%;
-	background: #0b090c;
+	background: var(--dark-black);
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -54,13 +54,13 @@ footer {
 		font-weight: bold;
 		font-size: 18px;
 
-		color: #828282;
+		color: var(--text-light-grey);
 	}
 	.pop-up {
 		position: absolute;
 		bottom: 3rem;
 		right: 0.5rem;
-		background: #252329;
+		background: var(--dark-grey);
 		padding: 1rem;
 		border-radius: 0.5rem;
 	}
@@ -69,7 +69,6 @@ footer {
 .list {
 	li {
 		border-radius: 0.5rem;
-		// background: #3c393f;
 		min-width: 164px;
 		button {
 			width: 100%;
@@ -88,7 +87,7 @@ footer {
 	border-radius: 0.5rem;
 	margin-bottom: 2rem;
 	padding: 0.5rem;
-	background: #3c393f;
+	background: var(--light-grey);
 	display: flex;
 	align-items: center;
 	input {

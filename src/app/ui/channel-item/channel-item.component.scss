@@ -7,7 +7,7 @@
 	position: relative;
 	outline: none;
 	&.active{
-		background: #25232950
+		background: rgba(var(--icon-grey-rgb), .25)
 	}
 	&:hover::after,
 	&:focus::after {
@@ -27,7 +27,7 @@
 		display: block;
 		width: 100%;
 		transform-origin: top left;
-		background: #252329;
+		background: var(--icon-grey);
 	}
 	overflow: hidden;
 	font-weight: bold;
@@ -44,7 +44,7 @@
 	text-align: center;
 	justify-content: center;
 	border-radius: 0.5rem;
-	background: #252329;
+	background: var(--icon-grey);
 	width: 42px;
 	height: 42px;
 	display: flex;
