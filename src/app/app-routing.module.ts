@@ -15,6 +15,7 @@ import { AuthenticatedGuard } from "./guards/authenticated.guard";
 import { ChannelParentComponent } from "./channel-parent/channel-parent.component";
 import { JoinPageComponent } from "./join-page/join-page.component";
 import { HomeGuard } from "./guards/home.guard";
+import { InviteGuardGuard } from "./guards/invite-guard.guard";
 
 const routes: Routes = [
 	{ path: "", pathMatch: "full", canActivate: [HomeGuard], component: HomeComponent },
@@ -57,6 +58,7 @@ const routes: Routes = [
 	{
 		path: "invite/:code",
 		component: JoinPageComponent,
+		canActivate: [InviteGuardGuard],
 	},
 ];
 

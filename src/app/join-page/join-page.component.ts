@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { channel } from "utils/types/channel";
+import { AuthService } from "../services/auth.service";
 import { ChannelService } from "../services/channel.service";
 
 @Component({
@@ -20,7 +21,7 @@ export class JoinPageComponent implements OnInit {
 		private route: ActivatedRoute,
 		private firestore: AngularFirestore,
 		private router: Router,
-		public channelManager: ChannelService
+		public channelManager: ChannelService,
 	) {
 		this.channels$ = this.route.paramMap.pipe(
 			switchMap(params => {
