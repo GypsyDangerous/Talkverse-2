@@ -10,13 +10,13 @@ export class DrawerService {
 
 	constructor(public breakpointObserver: BreakpointObserver) {
 		this.breakpointObserver
-			.observe(["(min-width: 425px)"])
+			.observe(["(min-width: 426px)"])
 			.subscribe((state: BreakpointState) => {
 				if (state.matches) {
-					this.showHamburger = true;
-				} else {
-					this.closeDrawer()
 					this.showHamburger = false;
+					this.closeDrawer()
+				} else {
+					this.showHamburger = true;
 				}
 			});
 	}

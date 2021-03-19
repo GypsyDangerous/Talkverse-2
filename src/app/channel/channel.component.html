@@ -1,6 +1,12 @@
 <main class="channel">
 	<header class="section-header">
-		<img class="hamburger" (click)="this.drawerManager.openDrawer()" src="assets/hamburger_icon.svg" alt="" />
+		<img
+			*ngIf="this.drawerManager.showHamburger"
+			class="hamburger"
+			(click)="this.drawerManager.openDrawer()"
+			src="assets/hamburger_icon.svg"
+			alt=""
+		/>
 		<ngx-skeleton-loader
 			*ngIf="loading; else name"
 			[theme]="{
@@ -24,6 +30,7 @@
 		</div>
 
 		<form
+			*ngIf="!this.empty"
 			id="message-form"
 			(ngSubmit)="sendMessage()"
 			class="message-input"

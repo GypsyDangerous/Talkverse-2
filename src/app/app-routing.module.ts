@@ -48,6 +48,10 @@ const routes: Routes = [
 				component: ChannelComponent,
 				canActivate: [ChannelGuard],
 			},
+			{
+				path: "**",
+				component: ChannelComponent,
+			},
 		],
 	},
 	{

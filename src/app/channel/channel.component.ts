@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { map, switchMap, take, tap } from "rxjs/operators";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -23,6 +23,8 @@ const defaultMessageForm = {
 	styleUrls: ["./channel.component.scss"],
 })
 export class ChannelComponent implements OnInit {
+	empty: boolean | undefined;
+
 	channel$: Observable<channel | undefined>;
 	loading: boolean = true;
 	messages$: Observable<message[]>;
@@ -38,10 +40,13 @@ export class ChannelComponent implements OnInit {
 		private channel: ChannelService,
 		public drawerManager: DrawerService,
 		public messaging: MessagingService
-	) {
+	) {}
+
+	ngOnInit(): void {
 		this.channel$ = this.route.paramMap.pipe(
 			switchMap(params => {
 				const id = params.get("id") as string;
+				this.empty = !id
 				return this.firestore
 					.collection("conversations")
 					.doc<channel>(id || " ")
@@ -65,9 +70,6 @@ export class ChannelComponent implements OnInit {
 					.valueChanges({ idField: "id" });
 			})
 		);
-	}
-
-	ngOnInit(): void {
 		this.channel$.subscribe(data => {
 			this.loading = false;
 			if (!data) {
@@ -94,30 +96,32 @@ export class ChannelComponent implements OnInit {
 		this.auth.user$
 			.pipe(
 				tap(user => {
-					this.channel$.pipe(
-						tap(channel => {
-							console.log(channel)
-							//@ts-ignore
-							const parsed_text = twemoji.parse(sanitizeHtml(raw_text));
-							const channelId = channel?.id;
-							const sender = user;
-							const read_by: string[] = [];
-							const created_at = new Date().getTime();
-							return this.firestore
-								.collection("conversations")
-								.doc(channelId)
-								.collection("messages")
-								.add({
-									raw_text,
-									parsed_text,
-									channelId,
-									sender,
-									read_by,
-									created_at,
-								});
-						}),
-						take(1)
-					).subscribe();
+					this.channel$
+						.pipe(
+							tap(channel => {
+								console.log(channel);
+								//@ts-ignore
+								const parsed_text = twemoji.parse(sanitizeHtml(raw_text));
+								const channelId = channel?.id;
+								const sender = user;
+								const read_by: string[] = [];
+								const created_at = new Date().getTime();
+								return this.firestore
+									.collection("conversations")
+									.doc(channelId)
+									.collection("messages")
+									.add({
+										raw_text,
+										parsed_text,
+										channelId,
+										sender,
+										read_by,
+										created_at,
+									});
+							}),
+							take(1)
+						)
+						.subscribe();
 				}),
 				take(1)
 			)
