@@ -98,7 +98,7 @@ export class ChannelComponent implements OnInit {
 		this.auth.user$.subscribe(user => {
 			this.channel$.subscribe(channel => {
 				if (user.id !== channel?.owner.id) return;
-				
+				this.leave();
 				this.firestore.collection("conversations").doc(channel.id).delete();
 
 				this.router.navigate(["channel"]);
