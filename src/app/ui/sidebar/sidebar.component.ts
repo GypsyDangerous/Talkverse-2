@@ -54,7 +54,6 @@ export class SidebarComponent implements OnInit {
 
 		this.auth.user$.subscribe(user => {
 			this.profilePicture = `${user.avatar}&v="${Math.random()}"`;
-			console.log(user.avatar, this.profilePicture);
 		});
 	}
 
@@ -72,9 +71,7 @@ export class SidebarComponent implements OnInit {
 	ngOnInit(): void {
 		this.channels$.subscribe(c => {
 			this.channels = c || [];
-			console.log(c);
 		});
-		this.channel.channel$.subscribe(console.log);
 	}
 
 	search(event: any) {
@@ -120,7 +117,6 @@ export class SidebarComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log(result);
 			if (!result) return;
 
 			const ref$ = this.auth.user$
@@ -145,7 +141,6 @@ export class SidebarComponent implements OnInit {
 					take(1)
 				)
 				.subscribe(async ({ channel, user, doc }) => {
-					console.log(user.id, doc.id, channel);
 
 					await firebase
 						.firestore()

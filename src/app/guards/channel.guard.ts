@@ -22,10 +22,6 @@ export class ChannelGuard implements CanActivate {
 		state: RouterStateSnapshot
 	): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		return this.auth.user$.pipe(
-			tap(user => {
-				console.log(user.id, route.params.id)
-				return user
-			}),
 			switchMap(user => {
 				return this.firestore
 					.collection("users")
@@ -34,10 +30,6 @@ export class ChannelGuard implements CanActivate {
 					.doc(route.params["id"])
 					.valueChanges()
 					.pipe(
-						tap(doc => {
-							console.log(doc);
-							return doc;
-						}),
 						map(doc => !!doc)
 					);
 			})

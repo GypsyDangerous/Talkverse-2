@@ -46,7 +46,6 @@ export class ChannelService {
 		this.auth.user$
 			.pipe(
 				tap(async user => {
-					console.log(user);
 					await firebase
 						.firestore()
 						.collection("users")

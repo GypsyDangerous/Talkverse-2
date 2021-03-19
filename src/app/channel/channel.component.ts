@@ -46,13 +46,14 @@ export class ChannelComponent implements OnInit {
 					.collection("conversations")
 					.doc<channel>(id || " ")
 					.valueChanges({ idField: "id" });
-			}),
-			tap(channel => {
-				if (channel) {
-					this.messaging.sub(channel.id);
-				}
 			})
 		);
+		this.channel$.pipe(take(1)).subscribe(channel => {
+			if (channel) {
+				console.log("subscribing to ", channel.id);
+				this.messaging.sub(channel.id!);
+			}
+		});
 		this.channel.setChannel(this.channel$);
 		this.messages$ = this.route.paramMap.pipe(
 			switchMap(params => {
@@ -69,7 +70,6 @@ export class ChannelComponent implements OnInit {
 	ngOnInit(): void {
 		this.channel$.subscribe(data => {
 			this.loading = false;
-			console.log(data);
 			if (!data) {
 				this.router.navigate(["/channel"]);
 			}
@@ -91,35 +91,33 @@ export class ChannelComponent implements OnInit {
 		console.log("submitted");
 
 		const raw_text = this.myForm.value.message;
-		console.log(raw_text);
 		this.auth.user$
 			.pipe(
 				tap(user => {
-					this.channel$
-						.pipe(
-							tap(channel => {
-								//@ts-ignore
-								const parsed_text = twemoji.parse(sanitizeHtml(raw_text));
-								const channelId = channel?.id;
-								const sender = user;
-								const read_by: string[] = [];
-								const created_at = new Date().getTime();
-								return this.firestore
-									.collection("conversations")
-									.doc(channelId)
-									.collection("messages")
-									.add({
-										raw_text,
-										parsed_text,
-										channelId,
-										sender,
-										read_by,
-										created_at,
-									});
-							}),
-							take(1)
-						)
-						.subscribe(console.log);
+					this.channel$.pipe(
+						tap(channel => {
+							console.log(channel)
+							//@ts-ignore
+							const parsed_text = twemoji.parse(sanitizeHtml(raw_text));
+							const channelId = channel?.id;
+							const sender = user;
+							const read_by: string[] = [];
+							const created_at = new Date().getTime();
+							return this.firestore
+								.collection("conversations")
+								.doc(channelId)
+								.collection("messages")
+								.add({
+									raw_text,
+									parsed_text,
+									channelId,
+									sender,
+									read_by,
+									created_at,
+								});
+						}),
+						take(1)
+					).subscribe();
 				}),
 				take(1)
 			)
