@@ -19,6 +19,7 @@ service cloud.firestore {
 
 		match /members/{memberId} {
 			allow read: if true;
+			allow create: if signedIn();
 			allow write: if isOwner(resource.data.id);
 		}
 	}
