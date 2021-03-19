@@ -23,7 +23,7 @@
 		<div class="buttons" *ngIf="!this.empty">
 			<button [copy-clipboard]="'http://localhost:4200/invite/'+this.InviteCode" mat-raised-button color="primary">Invite</button
 			><button mat-raised-button color="warn" (click)="leave()">Leave</button
-			><button *ngIf="this.isOwner" color="warn" mat-raised-button>Delete</button>
+			><button *ngIf="this.isOwner" color="warn" (click)="deleteChannel()" mat-raised-button>Delete</button>
 		</div>
 	</header>
 	<div class="channel-area">

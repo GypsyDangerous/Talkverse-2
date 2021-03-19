@@ -1,10 +1,18 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId}/{rest=**} {
+    
+
+	match /users/{userId}/{rest=**} {
 		allow read: if signedIn();
 		allow write: if isOwner(userId);
 	}
+
+	match /users/{userId}/channels/{channelId} {
+		allow read: if signedIn();
+		allow write: if isOwner(userId) || isOwner(resource.data.owner.id)
+	}
+	
 	
 	match /conversations/{channelId} {
 		allow read: if true;

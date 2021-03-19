@@ -12,6 +12,7 @@ import { sanitizeHtml } from "utils/functions/string";
 import { ChannelService } from "../services/channel.service";
 import { DrawerService } from "../services/drawer.service";
 import { MessagingService } from "../services/messaging.service";
+import { connectableObservableDescriptor } from "rxjs/internal/observable/ConnectableObservable";
 
 const defaultMessageForm = {
 	message: ["", [Validators.required]],
@@ -90,6 +91,34 @@ export class ChannelComponent implements OnInit {
 
 	get InviteCode() {
 		return this.inviteCodes[0];
+	}
+
+	async deleteChannel() {
+		console.log("deleting");
+		this.auth.user$.subscribe(user => {
+			this.channel$.subscribe(channel => {
+				if (user.id !== channel?.owner.id) return;
+				this.channel.members$.subscribe(async members => {
+					if (!members) return;
+					for (const member of members) {
+						try {
+							await this.firestore
+								.collection("users")
+								.doc(member?.id)
+								.collection("channels")
+								.doc(channel.id)
+								.delete();
+						} catch (err) {
+							console.log(err.message);
+							console.log(member)
+						}
+					}
+				});
+				this.firestore.collection("conversations").doc(channel.id).delete();
+
+				this.router.navigate(["channel"]);
+			});
+		});
 	}
 
 	async leave() {
