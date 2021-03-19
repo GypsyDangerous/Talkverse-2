@@ -13,6 +13,12 @@ import { ChannelService } from "../services/channel.service";
 import { DrawerService } from "../services/drawer.service";
 import { MessagingService } from "../services/messaging.service";
 import { connectableObservableDescriptor } from "rxjs/internal/observable/ConnectableObservable";
+import * as linkify from "linkify-urls"
+import * as showdown from "showdown"
+
+const converter = new showdown.Converter()
+converter.setOption("simplifiedAutoLink", true) 
+converter.setOption("openLinksInNewWindow", true) 
 
 const defaultMessageForm = {
 	message: ["", [Validators.required]],
@@ -106,6 +112,10 @@ export class ChannelComponent implements OnInit {
 		});
 	}
 
+	get inviteLink(){
+		return `${window.location.hostname}/invite/${this.InviteCode}`
+	}
+
 	async leave() {
 		console.log("leaving");
 		this.auth.user$.subscribe(user => {
@@ -150,7 +160,7 @@ export class ChannelComponent implements OnInit {
 							tap(channel => {
 								console.log(channel);
 								//@ts-ignore
-								const parsed_text = twemoji.parse(sanitizeHtml(raw_text));
+								const parsed_text = (converter.makeHtml(sanitizeHtml(raw_text)));
 								const channelId = channel?.id;
 								const sender = user;
 								const read_by: string[] = [];

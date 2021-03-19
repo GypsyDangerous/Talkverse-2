@@ -21,7 +21,7 @@
 			></ngx-skeleton-loader>
 		</div>
 		<div class="buttons" *ngIf="!this.empty">
-			<button [copy-clipboard]="'http://localhost:4200/invite/'+this.InviteCode" mat-raised-button color="primary">Invite</button
+			<button [copy-clipboard]="this.inviteLink" mat-raised-button color="primary">Invite</button
 			><button mat-raised-button color="warn" (click)="leave()">Leave</button
 			><button *ngIf="this.isOwner" color="warn" (click)="deleteChannel()" mat-raised-button>Delete</button>
 		</div>
