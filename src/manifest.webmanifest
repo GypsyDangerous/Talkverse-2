@@ -1,6 +1,6 @@
 {
-  "name": "chat-app",
-  "short_name": "chat-app",
+  "name": "Talkverse",
+  "short_name": "Talkverse",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
