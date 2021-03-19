@@ -113,7 +113,7 @@ export class ChannelComponent implements OnInit {
 	}
 
 	get inviteLink(){
-		return `${window.location.hostname}/invite/${this.InviteCode}`
+		return `${window.location.origin}/invite/${this.InviteCode}`
 	}
 
 	async leave() {
