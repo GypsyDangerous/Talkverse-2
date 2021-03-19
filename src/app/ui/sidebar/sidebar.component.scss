@@ -41,7 +41,7 @@ ul {
 main {
 	padding: 1rem;
 	max-height: calc(100vh - 60px - 75px);
-    overflow: auto;
+    overflow-y: auto;
 	&::-webkit-scrollbar {
 		width: 0.5rem;
 	}
