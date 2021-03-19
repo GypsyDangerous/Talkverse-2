@@ -14,7 +14,7 @@
 		></div>
 	</div>
 	<div class="options">
-		<button (click)="deleteMessage()" mat-button>
+		<button *ngIf="this.isSender" (click)="deleteMessage()" mat-button>
 			<mat-icon>delete</mat-icon>
 		</button>
 	</div>
