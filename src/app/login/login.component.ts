@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { subscribeOn } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
 	selector: "app-login",
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
 		public auth: AuthService,
 		private builder: FormBuilder,
 		private snackBar: MatSnackBar,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
 			email: ["", [Validators.required, Validators.email]],
 			password: ["", [Validators.required, Validators.minLength(6)]],
 		});
+		this.auth.getRedirect(this.route);
 	}
 
 	get email() {
@@ -42,14 +44,18 @@ export class LoginComponent implements OnInit {
 
 		try {
 			await this.auth.login(email, password);
-			this.router.navigate(["/"])
+			if (this.auth.redirect) {
+				this.router.navigate(this.auth.redirect.split("/"));
+			} else {
+				this.router.navigate(["/"]);
+			}
 			return true;
 		} catch (err) {
 			this.snackBar.open(`Error: Invalid email or password`, "dismiss", {
 				duration: 5000000,
 				horizontalPosition: "start",
 				verticalPosition: "top",
-				panelClass: ['warn-snackbar']
+				panelClass: ["warn-snackbar"],
 			});
 			return false;
 		}

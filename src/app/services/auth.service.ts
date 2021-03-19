@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 
-import { Router } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import firebase from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { Observable, of } from "rxjs";
 
-import { switchMap } from "rxjs/operators";
+import { filter, map, switchMap, take } from "rxjs/operators";
 import { user as User } from "../../../utils/types/user";
 
 @Injectable({
@@ -15,10 +15,13 @@ import { user as User } from "../../../utils/types/user";
 export class AuthService {
 	user$: Observable<User>;
 	userId: string = "";
+
+	redirect: string | null;
 	constructor(
 		private afAuth: AngularFireAuth,
 		private firestore: AngularFirestore,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) {
 		//@ts-ignore
 		this.user$ = this.afAuth.authState.pipe(
@@ -35,10 +38,25 @@ export class AuthService {
 		});
 	}
 
+	getRedirect(route: ActivatedRoute): void {
+		route.queryParamMap.subscribe(params => {
+			this.redirect = params.get("redirect");
+		});
+	}
+
 	async googleSignin() {
 		const provider = new firebase.auth.GoogleAuthProvider();
 		const credential = await this.afAuth.signInWithPopup(provider);
+		console.log(this.redirect?.split("/"))
+		if (this.redirect) return this.redirectTo(this.redirect.split("/"));
 		return this.router.navigate(["/"]);
+	}
+
+	redirectTo(path: string[]){
+		this.user$.pipe(take(1)).subscribe(() => {
+			console.log("redirecting to", path)
+			this.router.navigate(path)
+		})
 	}
 
 	async signOut() {

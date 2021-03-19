@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 @Component({
 	selector: "app-register",
@@ -17,7 +17,8 @@ export class RegisterComponent implements OnInit {
 		private firestore: AngularFirestore,
 		private builder: FormBuilder,
 		private snackBar: MatSnackBar,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
 			email: ["", [Validators.required, Validators.email]],
 			password: ["", [Validators.required, Validators.minLength(6)]],
 		});
+		this.auth.getRedirect(this.route);
 	}
 
 	get email() {
@@ -47,7 +49,11 @@ export class RegisterComponent implements OnInit {
 
 		try {
 			await this.auth.register(email, password, username);
-			this.router.navigate(["/"])
+			if (this.auth.redirect) {
+				this.router.navigate(this.auth.redirect.split("/"));
+			} else {
+				this.router.navigate(["/"]);
+			}
 			return true;
 		} catch (err) {
 			this.snackBar.open(`Error: Invalid email or password`, "dismiss", {

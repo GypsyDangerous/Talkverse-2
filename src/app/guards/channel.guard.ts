@@ -30,7 +30,8 @@ export class ChannelGuard implements CanActivate {
 					.doc(route.params["id"])
 					.valueChanges()
 					.pipe(
-						map(doc => !!doc)
+						map(doc => !!doc),
+						tap(doc => console.log({doc}))
 					);
 			})
 		);
