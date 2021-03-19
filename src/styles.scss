@@ -107,3 +107,9 @@ img{
 a{
 	color: var(--secondary);
 }
+
+.content-area{ 
+	img {
+		max-width: 100%;
+	}
+}
