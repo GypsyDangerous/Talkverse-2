@@ -31,6 +31,10 @@ export class ProfileComponent implements OnInit {
 		private channelManager: ChannelService
 	) {}
 
+	cancel(){
+		this.dialogRef.close()
+	}
+
 	ngOnInit(): void {}
 
 	openFile() {

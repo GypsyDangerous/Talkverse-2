@@ -12,7 +12,7 @@
 
 	<div mat-dialog-actions>
 		<button mat-raised-button color="primary" [mat-dialog-close]="data">Save</button>
-		<button mat-raised-button color="warn">Cancel</button>
+		<button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
 	</div>
 
 	<input type="file" class="hidden" id="pfp-selector" (change)="handleFileInput($event)" />
