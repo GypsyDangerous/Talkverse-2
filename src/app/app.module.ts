@@ -43,6 +43,7 @@ import { UserSettingsComponent } from "./user-settings/user-settings.component";
 
 import { LayoutModule } from "@angular/cdk/layout";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { CopyClipboardDirective } from './copy-to-clipboard.directive';
 
 @NgModule({
 	declarations: [
@@ -63,6 +64,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 		NewChannelComponent,
 		JoinPageComponent,
 		UserSettingsComponent,
+		CopyClipboardDirective,
 	],
 	imports: [
 		BrowserModule,

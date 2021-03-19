@@ -32,7 +32,6 @@
 	}
 }
 
-
 header {
 	h1 {
 		margin: 0;
@@ -45,8 +44,15 @@ header {
 		letter-spacing: 0.1rem;
 	}
 	padding: 1.8rem;
-	display: flex;
-	align-items: center;
+	.buttons {
+		gap: 1rem;
+	}
+	justify-content: space-between;
+	&,
+	& > div {
+		display: flex;
+		align-items: center;
+	}
 }
 
 .message-input {
@@ -102,7 +108,7 @@ header {
 	cursor: pointer;
 }
 
-.hamburger{
+.hamburger {
 	margin-right: 2ch;
 	filter: invert(1);
 }

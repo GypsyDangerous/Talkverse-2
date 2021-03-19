@@ -24,10 +24,11 @@ const defaultMessageForm = {
 })
 export class ChannelComponent implements OnInit {
 	empty: boolean | undefined;
-
+	isOwner: boolean;
 	channel$: Observable<channel | undefined>;
 	loading: boolean = true;
 	messages$: Observable<message[]>;
+	inviteCodes: string[];
 
 	myForm: FormGroup;
 
@@ -46,7 +47,7 @@ export class ChannelComponent implements OnInit {
 		this.channel$ = this.route.paramMap.pipe(
 			switchMap(params => {
 				const id = params.get("id") as string;
-				this.empty = !id
+				this.empty = !id;
 				return this.firestore
 					.collection("conversations")
 					.doc<channel>(id || " ")
@@ -71,13 +72,47 @@ export class ChannelComponent implements OnInit {
 			})
 		);
 		this.channel$.subscribe(data => {
+			this.inviteCodes = data?.inviteCodes || [];
 			this.loading = false;
 			if (!data) {
 				this.router.navigate(["/channel"]);
 			}
 		});
 
+		this.auth.user$.subscribe(user => {
+			this.channel$.subscribe(channel => {
+				this.isOwner = user.id === channel?.owner.id;
+			});
+		});
+
 		this.myForm = this.builder.group({ ...defaultMessageForm });
+	}
+
+	get InviteCode() {
+		return this.inviteCodes[0];
+	}
+
+	async leave() {
+		console.log("leaving");
+		this.auth.user$.subscribe(user => {
+			this.channel$.subscribe(async channel => {
+				console.log(channel);
+				await this.firestore
+					.collection("users")
+					.doc(user.id)
+					.collection("channels")
+					.doc(channel?.id)
+					.delete();
+
+				this.firestore
+					.collection("conversations")
+					.doc(channel?.id)
+					.collection("members")
+					.doc(user.id)
+					.delete();
+				this.router.navigate(["channel"]);
+			});
+		});
 	}
 
 	get currentMessage() {

@@ -1,23 +1,30 @@
 <main class="channel">
 	<header class="section-header">
-		<img
-			*ngIf="this.drawerManager.showHamburger"
-			class="hamburger"
-			(click)="this.drawerManager.openDrawer()"
-			src="assets/hamburger_icon.svg"
-			alt=""
-		/>
-		<ngx-skeleton-loader
-			*ngIf="loading; else name"
-			[theme]="{
-				marginBottom: '0px',
-				backgroundColor: '#eff1f633',
-				maxWidth: '50vw',
-				width: '400px'
-			}"
-			count="1"
-			animation="progress-dark"
-		></ngx-skeleton-loader>
+		<div>
+			<img
+				*ngIf="this.drawerManager.showHamburger"
+				class="hamburger"
+				(click)="this.drawerManager.openDrawer()"
+				src="assets/hamburger_icon.svg"
+				alt=""
+			/>
+			<ngx-skeleton-loader
+				*ngIf="loading; else name"
+				[theme]="{
+					marginBottom: '0px',
+					backgroundColor: '#eff1f633',
+					maxWidth: '50vw',
+					width: '400px'
+				}"
+				count="1"
+				animation="progress-dark"
+			></ngx-skeleton-loader>
+		</div>
+		<div class="buttons" *ngIf="!this.empty">
+			<button [copy-clipboard]="'http://localhost:4200/invite/'+this.InviteCode" mat-raised-button color="primary">Invite</button
+			><button mat-raised-button color="warn" (click)="leave()">Leave</button
+			><button *ngIf="this.isOwner" color="warn" mat-raised-button>Delete</button>
+		</div>
 	</header>
 	<div class="channel-area">
 		<div class="scroll-container">

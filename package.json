@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-	"deploy:firebase": "ng build --prod && firebase deploy"
+    "deploy:firebase": "ng build --prod && firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +33,7 @@
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "twemoji": "^13.0.2",
+    "uid": "^2.0.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
