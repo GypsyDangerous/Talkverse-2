@@ -10,3 +10,29 @@ export const aggregateMembers = functions.firestore
 
 		return docRef.update({ memberList: admin.firestore.FieldValue.arrayUnion(userId) });
 	});
+
+export const removeMembers = functions.firestore
+	.document("conversations/{channelId}")
+	.onDelete(async (snapshot, context) => {
+		const { channelId } = context.params;
+
+		const collectionRef = admin
+			.firestore()
+			.collection("conversations")
+			.doc(channelId)
+			.collection("members");
+
+		const collection = await collectionRef.get();
+
+		for (const user of collection.docs) {
+			const docRef = admin
+				.firestore()
+				.collection("users")
+				.doc(user.id)
+				.collection("channels")
+				.doc(channelId);
+			await docRef.delete();
+		}
+
+		return true;
+	});

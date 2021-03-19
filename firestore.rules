@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     
 
-	match /users/{userId}/{rest=**} {
+	match /users/{userId} {
 		allow read: if signedIn();
 		allow write: if isOwner(userId);
 	}
@@ -12,7 +12,6 @@ service cloud.firestore {
 		allow read: if signedIn();
 		allow write: if isOwner(userId) || isOwner(resource.data.owner.id)
 	}
-	
 	
 	match /conversations/{channelId} {
 		allow read: if true;

@@ -98,22 +98,7 @@ export class ChannelComponent implements OnInit {
 		this.auth.user$.subscribe(user => {
 			this.channel$.subscribe(channel => {
 				if (user.id !== channel?.owner.id) return;
-				this.channel.members$.subscribe(async members => {
-					if (!members) return;
-					for (const member of members) {
-						try {
-							await this.firestore
-								.collection("users")
-								.doc(member?.id)
-								.collection("channels")
-								.doc(channel.id)
-								.delete();
-						} catch (err) {
-							console.log(err.message);
-							console.log(member)
-						}
-					}
-				});
+				
 				this.firestore.collection("conversations").doc(channel.id).delete();
 
 				this.router.navigate(["channel"]);
