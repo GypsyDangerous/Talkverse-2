@@ -160,7 +160,7 @@ export class ChannelComponent implements OnInit {
 							tap(channel => {
 								console.log(channel);
 								//@ts-ignore
-								const parsed_text = twemoji.parse(converter.makeHtml(sanitizeHtml(raw_text)));
+								const parsed_text = converter.makeHtml(twemoji.parse(sanitizeHtml(raw_text)));
 								const channelId = channel?.id;
 								const sender = user;
 								const read_by: string[] = [];
